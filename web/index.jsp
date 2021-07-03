@@ -33,8 +33,8 @@
                 <hr class="sidebar-divider my-0">
 
                 <ul class="navbar-nav text-light" id="accordionSidebar">
-                    <li class="nav-item"><a class="nav-link" href="login.html"><i class="fas fa-table"></i><span>Login</span></a></li>
-                    <li class="nav-item"><a class="nav-link" href="register.html"><i class="fas fa-table"></i><span>Register</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="login.jsp"><i class="fas fa-table"></i><span>Login</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="register.jsp"><i class="fas fa-table"></i><span>Register</span></a></li>
                 </ul>
             </div>
         </nav>

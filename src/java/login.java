@@ -6,6 +6,8 @@
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -29,7 +31,13 @@ public class login extends HttpServlet {
             
             databaseClass obj=new databaseClass();
             if(obj.DBSignin(email, password)){
-                response.sendRedirect("user-profile.html");
+                
+                ServletContext context=getServletContext();
+                
+                RequestDispatcher RD=context.getRequestDispatcher("/user-profile.jsp");
+                RD.include(request, response);
+                
+                //response.sendRedirect("user-profile.jsp");
             }
             else{
                 response.sendRedirect("login.html");

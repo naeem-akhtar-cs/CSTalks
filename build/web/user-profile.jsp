@@ -78,8 +78,6 @@
                                     <div class="mb-3"><button class="btn btn-primary btn-sm" type="button">Change Photo</button></div>
                                 </div>
                             </div>
-
-
                         </div>
                         <div class="col-lg-8">
 
@@ -93,7 +91,7 @@
                                             <form>
                                                 <div class="form-row">
                                                     <div class="col">
-                                                        <div class="form-group"><label for="username"><strong>Date Joined</strong></label><input class="form-control" type="text" id="username" placeholder="2019/09/03" name="username"></div>
+                                                        <div class="form-group"><label for="username"><strong>User ID</strong></label><input class="form-control" type="text" id="username" placeholder="23" name="username"></div>
                                                     </div>
                                                     <div class="col">
                                                         <div class="form-group"><label for="email"><strong>Email Address</strong></label><input class="form-control" type="email" id="email" placeholder="naeem.akhtar.cs@gmail.com" name="email"></div>
