@@ -15,6 +15,19 @@
 <body id="page-top">
     <div id="wrapper">
         
+        <jsp:useBean id = "bookmarks" class = "BeansPkg.showBookMark" scope="page"></jsp:useBean>
+        <% 
+        if(session.getAttribute("email")==null){
+            response.sendRedirect("login.jsp");
+        }
+        else{
+            bookmarks.getData((String)session.getAttribute("email")); 
+        }
+        %>
+
+        
+
+        
         <jsp:include page="menu.jsp" />
 
         <div class="d-flex flex-column" id="content-wrapper">
@@ -35,87 +48,17 @@
                                             <th>Questions </th>
                                             <th>Category</th>
                                         </tr>
-
-
-
-
                                     </thead>
                                     <tbody>
 
-                                        <tr>
-                                            <td><a href="#">What does ACID stand for in Database?</a></td>
-                                            <td>Database</td>
-                                        </tr>
-
-
-                                        <tr>
-                                            <td><a href="#">Why do we use Transactions in Database?</a></td>
-                                            <td>Database</td>
-                                        </tr>
-
-                                        <tr>
-                                            <td><a href="#">What is Difference Between Dynamic and Static Ploymorphism?</a></td>
-                                            <td>OOP</td>
-                                        </tr>
-
-                                        <tr>
-                                            <td><a href="#">What is Ton for Air Conditioner mean?</a></td>
-                                            <td>General</td>
-                                        </tr>
-
-                                        <tr>
-                                            <td><a href="#">What are Draw Backs of Inheritance?</a></td>
-                                            <td>OOP</td>
-                                        </tr>
-
-                                        <tr>
-                                            <td><a href="#">What is Static in Java Programming? </a></td>
-                                            <td>OOP</td>
-                                        </tr>
-
-                                        <tr>
-                                            <td>
-                                                <a href="#">What is the one thing that you would like to do in your Life?</a>
-                                                <td>General</td>
-                                            </td>
-                                        </tr>
-
-                                        <tr>
-                                            <td>
-                                                <a href="#">Who was Dena Wadia?</a>
-                                                <td>General Knowledge</td>
-                                            </td>
-                                        </tr>
-
-                                        <tr>
-                                            <td>
-                                                <a href="#">Who was Emma Wegenast?</a>
-                                                <td>General Knowledge</td>
-                                            </td>
-                                        </tr>
-
-                                        <tr>
-                                            <td><a href="#">Why main() function is static in Java and NOT in C++ Programming Language?</a></td>
-                                            <td>Java Programming (OOP)</td>
-                                        </tr>
-
-                                        <tr>
-                                            <td><a href="#">Why we don't Need Object Reference to call a Static Function?</a></td>
-                                            <td>OOP</td>
-                                        </tr>
-
-                                        <tr>
-                                            <td><a href="#">Why do we need Trees eventhough we have LinkedLists?</a></td>
-                                            <td>Data Structures</td>
-                                        </tr>
-
-                                        <tr>
-                                            <td><a href="#">Why we have to make Constructor and Destructor Virtual in C++ while implementing Ploymorphism?</a></td>
-                                            <td>C++ Programming</td>
-                                        </tr>
+                                        <% for(int i=0;i<bookmarks.getcount();i++){ %>
+                                            <tr>
+                                                <td><a href="question-detail.jsp"><jsp:getProperty name="bookmarks" property="statement"/></a></td>
+                                                <td><jsp:getProperty name="bookmarks" property="category"/></td>
+                                            </tr>
+                                        <% } bookmarks.resetIndex();  %>
 
                                     </tbody>
-
                                 </table>
                             </div>
                             <div class="row">

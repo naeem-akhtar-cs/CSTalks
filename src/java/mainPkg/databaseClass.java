@@ -17,6 +17,7 @@ import java.util.logging.Logger;
  *
  * @author naeem
  */
+
 public class databaseClass {
 
     private Connection con;
@@ -117,7 +118,7 @@ public class databaseClass {
 
         try {
 
-            String query = "select ID, fName, lName, useraddress, city, province from common_user where email=?";
+            String query = "select ID, email, fName, lName, useraddress, city, province from common_user where email=?";
 
             PreparedStatement PS = con.prepareStatement(query);
 
@@ -127,6 +128,7 @@ public class databaseClass {
             RS.next();
 
             userData.put("ID", RS.getString("ID"));
+            userData.put("email", RS.getString("email"));
             userData.put("fName", RS.getString("fName"));
             userData.put("lName", RS.getString("lName"));
             userData.put("address", RS.getString("useraddress"));
@@ -170,6 +172,37 @@ public class databaseClass {
         return questions;
     }
 
+    public ArrayList<HashMap<String, String>> getBookMarks(String email) {
+
+        ArrayList<HashMap<String, String>> questions = new ArrayList<>();
+
+        try {
+            String query = "select question_statement, title as categoryTitle from bookMarks join questions on "
+                    + "bookMarks.ID=questions.ID join categories on questions.category=categories.ID join common_user on "
+                    + "bookMarks.owner_id=common_user.ID where common_user.email=?";
+
+            PreparedStatement PS = con.prepareStatement(query);
+
+            PS.setString(1, email);
+            
+            ResultSet RS = PS.executeQuery();
+
+            while (RS.next()) {
+                HashMap<String, String> question = new HashMap<>();
+
+                question.put("statement", RS.getString("question_statement"));
+                question.put("category", RS.getString("categoryTitle"));
+
+                questions.add(question);
+            }
+            this.con.close();
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return questions;
+    }
+    
     public ArrayList<String> getCategories() {
         ArrayList<String> list = new ArrayList<>();
 
@@ -237,4 +270,69 @@ public class databaseClass {
         
     }
     
+    public ArrayList<HashMap<String, String>> getNotes(String email){
+        
+        ArrayList<HashMap<String, String>> notes = new ArrayList<>();
+
+        try {
+            String query = "select note, date_added from notes join common_user on notes.owner_id=common_user.ID where common_user.email=?";
+            
+            PreparedStatement PS = con.prepareStatement(query);
+            
+            PS.setString(1, email);
+            
+            ResultSet RS = PS.executeQuery();
+
+            while (RS.next()) {
+                HashMap<String, String> myNote = new HashMap<>();
+
+                myNote.put("note", RS.getString("note"));
+                myNote.put("date", RS.getString("date_added"));
+
+                notes.add(myNote);
+            }
+            this.con.close();
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return notes;
+    }
+    
+    public void addRequestedTopic(String topic, String email){
+        try {
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+            LocalDateTime now = LocalDateTime.now();
+            
+            
+            String query="select ID from common_user where email=?";
+            
+            PreparedStatement PS=con.prepareStatement(query);
+            
+            PS.setString(1, email);
+            
+            ResultSet RS=PS.executeQuery();
+            
+            RS.next();
+            
+            int userID=Integer.parseInt(RS.getString("ID"));
+            
+            
+            String query1="insert into requestedTopics values(?,?,?)";
+            
+            PreparedStatement PS1=con.prepareStatement(query1);
+            
+            PS1.setString(1, topic);
+            PS1.setString(2, dtf.format(now));
+            PS1.setInt(3, userID);
+            
+            
+            PS1.executeQuery();
+            
+            con.close();
+            
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
 }

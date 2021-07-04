@@ -32,6 +32,12 @@
 <body id="page-top">
     <div id="wrapper">
         
+        <% 
+        if(session.getAttribute("email")==null){
+            response.sendRedirect("login.jsp");
+        }
+        %>
+
         <jsp:include page="menu.jsp" />
 
         <div class="d-flex flex-column" id="content-wrapper">
@@ -51,10 +57,12 @@
                         <div class="card-body">
                             <div>Topic Title should be Short, Clear and Concise:</div>
                             </br>
+                            <form method="POST" action="http://localhost:8080/CSTalks/requestTopic" >
                             <div class="form-group">
                                 <input class="form-control form-control-user" type="text" id="topic" aria-describedby="emailHelp" placeholder="Title" name="statement">
                             </div>
                             <button class="btn btn-primary text-white btn-user" type="submit" style="float:right">Request</button>
+                            </form>
                         </div>
                     </div>
                 </div>

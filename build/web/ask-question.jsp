@@ -32,10 +32,18 @@
 
 <body id="page-top">
 
-    <jsp:useBean id="category" class="BeansPkg.categoriesHelper" scope="application"></jsp:useBean>
+    
 
-    <jsp:useBean id="categoryVal" class="BeansPkg.categoriesHelper" scope="application"></jsp:useBean>
+    <jsp:useBean id="category" class="BeansPkg.categoriesHelper" scope="page"></jsp:useBean>
 
+    <jsp:useBean id="categoryVal" class="BeansPkg.categoriesHelper" scope="page"></jsp:useBean>
+
+    <% 
+        if(session.getAttribute("email")==null){
+            response.sendRedirect("login.jsp");
+        }
+    %>
+    
     <div id="wrapper">
         
         <jsp:include page="menu.jsp" />

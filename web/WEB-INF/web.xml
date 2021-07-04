@@ -16,6 +16,18 @@
         <servlet-name>askquestion</servlet-name>
         <servlet-class>mainPkg.askquestion</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>signout</servlet-name>
+        <servlet-class>mainPkg.signout</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SessionExists</servlet-name>
+        <servlet-class>mainPkg.SessionExists</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>requestTopic</servlet-name>
+        <servlet-class>mainPkg.requestTopic</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>signup</servlet-name>
         <url-pattern>/signup</url-pattern>
@@ -27,6 +39,18 @@
     <servlet-mapping>
         <servlet-name>askquestion</servlet-name>
         <url-pattern>/askquestion</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>signout</servlet-name>
+        <url-pattern>/signout</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SessionExists</servlet-name>
+        <url-pattern>/SessionExists</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>requestTopic</servlet-name>
+        <url-pattern>/requestTopic</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -24,6 +24,13 @@
 </head>
 
 <body id="page-top">
+
+    <% 
+    if(session.getAttribute("email")!=null){
+        response.sendRedirect("user-profile.jsp");
+    } 
+    %>
+
     <div id="wrapper">
         <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0">
             <div class="container-fluid d-flex flex-column p-0">

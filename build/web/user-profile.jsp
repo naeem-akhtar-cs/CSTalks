@@ -14,8 +14,16 @@
 
 <body id="page-top">
 
-    <jsp:useBean id ="user" class = "BeansPkg.userprofile" scope="application"></jsp:useBean>
-    <% user.getData((String)session.getAttribute("email")); %>
+    <jsp:useBean id ="user" class = "BeansPkg.userprofile" scope="page"></jsp:useBean>
+
+    <% 
+    if(session.getAttribute("email")==null){
+        response.sendRedirect("login.jsp");
+    }
+    else{
+        user.getData((String)session.getAttribute("email"));
+    }
+    %>
 
     <div id="wrapper">
         

@@ -15,6 +15,17 @@
 <body id="page-top">
     <div id="wrapper">
         
+        <jsp:useBean id = "notes" class = "BeansPkg.notesHelper" scope="page"></jsp:useBean>
+
+        <% 
+        if(session.getAttribute("email")==null){
+            response.sendRedirect("login.jsp");
+        }
+        else{
+            notes.getData((String)session.getAttribute("email")); 
+        }
+        %>
+
         <jsp:include page="menu.jsp" />
 
         <div class="d-flex flex-column" id="content-wrapper">
@@ -39,47 +50,18 @@
                                     </thead>
                                     <tbody>
 
+                                        <% for(int i=0;i<notes.getcount();i++){ %>
+
                                         <tr>
-                                            <td>PIT Presentation in Next Class</td>
-                                            <td>2021/05/27</td>
+                                            <td><jsp:getProperty name="notes" property="note"/></td>
+                                            <td><jsp:getProperty name="notes" property="date"/></td>
                                             <td>
                                                 <div class="mb-3"><button class="btn btn-primary btn-sm" type="button">Delete</button></div>
                                             </td>
                                         </tr>
 
-                                        <tr>
-                                            <td>Data Science Assign 2</td>
-                                            <td>2021/05/23</td>
-                                            <td>
-                                                <div class="mb-3"><button class="btn btn-primary btn-sm" type="button">Delete</button></div>
-                                            </td>
-                                        </tr>
-
-                                        <tr>
-                                            <td>Advanced Programming Deliverable</td>
-                                            <td>2021/05/27</td>
-                                            <td>
-                                                <div class="mb-3"><button class="btn btn-primary btn-sm" type="button">Delete</button></div>
-                                            </td>
-                                        </tr>
-
-                                        <tr>
-                                            <td>FYP Report</td>
-                                            <td>2021/05/27</td>
-                                            <td>
-                                                <div class="mb-3"><button class="btn btn-primary btn-sm" type="button">Delete</button></div>
-                                            </td>
-                                        </tr>
-
-                                        <tr>
-                                            <td>FYP Meeting</td>
-                                            <td>2021/05/27</td>
-                                            <td>
-                                                <div class="mb-3"><button class="btn btn-primary btn-sm" type="button">Delete</button></div>
-                                            </td>
-                                        </tr>
-
-
+                                        
+                                        <% } notes.resetIndex();  %>
 
                                     </tbody>
 
