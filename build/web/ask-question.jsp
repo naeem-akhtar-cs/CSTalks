@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>Dashboard - CSTALKS</title>
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
     <link rel="stylesheet" href="assets/fonts/fontawesome-all.min.css">
     <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
     <link rel="stylesheet" href="assets/fonts/fontawesome5-overrides.min.css">
@@ -21,7 +22,7 @@
         .w-100 {
             width: 100%;
         }
-        
+
         .tar {
             text-align: right;
         }
@@ -30,6 +31,11 @@
 </head>
 
 <body id="page-top">
+
+    <jsp:useBean id="category" class="BeansPkg.categoriesHelper" scope="application"></jsp:useBean>
+
+    <jsp:useBean id="categoryVal" class="BeansPkg.categoriesHelper" scope="application"></jsp:useBean>
+
     <div id="wrapper">
         <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0">
             <div class="container-fluid d-flex flex-column p-0">
@@ -39,30 +45,45 @@
                 </a>
                 <hr class="sidebar-divider my-0">
                 <ul class="navbar-nav text-light" id="accordionSidebar">
-                    <li class="nav-item"><a class="nav-link active" href="user-profile.html"><i class="fas fa-user"></i><span>Profile</span></a></li>
-                    <li class="nav-item"><a class="nav-link" href="notes.html"><i class="fas fa-table"></i><span>Check Personal Notes</span></a></li>
-                    <li class="nav-item"><a class="nav-link" href="search-questions.html"><i class="fas fa-table"></i><span>Search Questions</span></a></li>
-                    <li class="nav-item"><a class="nav-link" href="bookmark.html"><i class="fas fa-table"></i><span>BookMarked Questions</span></a></li>
-                    <li class="nav-item"><a class="nav-link" href="ask-question.html"><i class="fas fa-table"></i><span>Ask Question</span></a></li>
-                    <li class="nav-item"><a class="nav-link" href="request-topic.html"><i class="fas fa-table"></i><span>Request New Topic</span></a></li>
+                    <li class="nav-item"><a class="nav-link active" href="user-profile.jsp"><i
+                                class="fas fa-user"></i><span>Profile</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="notes.jsp"><i class="fas fa-table"></i><span>Check
+                                Personal Notes</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="search-questions.jsp"><i
+                                class="fas fa-table"></i><span>Search Questions</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="bookmark.jsp"><i
+                                class="fas fa-table"></i><span>BookMarked Questions</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="ask-question.jsp"><i
+                                class="fas fa-table"></i><span>Ask Question</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="request-topic.jsp"><i
+                                class="fas fa-table"></i><span>Request New Topic</span></a></li>
 
                 </ul>
-                <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button></div>
+                <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0"
+                        id="sidebarToggle" type="button"></button></div>
             </div>
         </nav>
         <div class="d-flex flex-column" id="content-wrapper">
             <div id="content">
                 <nav class="navbar navbar-light navbar-expand bg-white shadow mb-4 topbar static-top">
-                    <div class="container-fluid"><button class="btn btn-link d-md-none rounded-circle mr-3" id="sidebarToggleTop" type="button"><i class="fas fa-bars"></i></button>
+                    <div class="container-fluid"><button class="btn btn-link d-md-none rounded-circle mr-3"
+                            id="sidebarToggleTop" type="button"><i class="fas fa-bars"></i></button>
                         <ul class="navbar-nav flex-nowrap ml-auto">
                             <li class="nav-item dropdown no-arrow mx-1">
-                                <li class="nav-item dropdown no-arrow">
-                                    <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link" aria-expanded="false" data-toggle="dropdown" href="#"><span class="d-none d-lg-inline mr-2 text-gray-600 small">Naeem Akhtar</span><img class="border rounded-circle img-profile" src="assets/img/avatars/avatar1.png"></a>
-                                        <div class="dropdown-menu shadow dropdown-menu-right animated--grow-in"><a class="dropdown-item" href="#"><i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Profile</a>
-                                            <div class="dropdown-divider"></div><a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Logout</a>
-                                        </div>
+                            <li class="nav-item dropdown no-arrow">
+                                <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link"
+                                        aria-expanded="false" data-toggle="dropdown" href="#"><span
+                                            class="d-none d-lg-inline mr-2 text-gray-600 small">Naeem Akhtar</span><img
+                                            class="border rounded-circle img-profile"
+                                            src="assets/img/avatars/avatar1.png"></a>
+                                    <div class="dropdown-menu shadow dropdown-menu-right animated--grow-in"><a
+                                            class="dropdown-item" href="#"><i
+                                                class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Profile</a>
+                                        <div class="dropdown-divider"></div><a class="dropdown-item" href="#"><i
+                                                class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Logout</a>
                                     </div>
-                                </li>
+                                </div>
+                            </li>
                         </ul>
                     </div>
                 </nav>
@@ -77,36 +98,48 @@
                 <div class="container-fluid">
                     <h3 class="text-dark mb-4">Post a Question</h3>
                     <p>
-                        <div class="card shadow">
+                    <div class="card shadow">
 
-                            <div class="card-body">
-
+                        <div class="card-body">
+                            <form method="POST" action="http://localhost:8080/CSTalks/askquestion" name="ask-question-form">
                                 <div class="d-table w-100">
                                     <p class="text-dark mb-4">Category of question : </p>
 
                                     <div class="d-table-cell tar">
-                                        <form action="/action_page.php">
-                                            <select name="cars" id="cars">
-                                                <option value="volvo">Database</option>
-                                                <option value="saab">OOP</option>
-                                                <option value="opel">General</option>
-                                                <option value="audi">JAVA Programming</option>
-	                                            <option value="audi">C++ programming</option>
-	                                            <option value="audi">Data structures</option>
-	                                            <option value="audi">General Knowledge</option>
+                                            <select name="categories">
+
+                                                <% for(int i=0;i<category.getcount();i++){ %>
+
+                                                    <!--Need to change this approach
+                                                    Not Good Practice-->
+
+                                                    <option value=
+                                                    "<jsp:getProperty name="categoryVal" property="title" />"
+                                                    >
+                                                        <jsp:getProperty name="category" property="title" />
+                                                    </option>
+
+                                                    <% } category.resetIndex(); categoryVal.resetIndex();%>
+
                                             </select>
                                             <br><br>
-                                        </form>
                                     </div>
+
                                 </div>
 
                                 <div class="form-group">
-                                    <input class="form-control form-control-user" type="text" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Question statement" name="statement">
+                                    <input class="form-control form-control-user" type="text" id="exampleInputEmail"
+                                        aria-describedby="emailHelp" placeholder="Question statement" name="statement">
                                 </div>
-                                <button class="btn btn-primary text-white btn-user" type="submit" style="float:right">Post</button>
-                            </div>
+
+                                <button class="btn btn-primary text-white btn-user" type="submit"
+                                    style="float:right">Post</button>
+
+                            </form>
 
                         </div>
+
+                    </div>
 
 
                 </div>

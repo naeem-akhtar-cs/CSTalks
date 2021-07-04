@@ -13,6 +13,10 @@
 </head>
 
 <body id="page-top">
+
+    <jsp:useBean id = "questions" class = "BeansPkg.questionshelper" scope="application"></jsp:useBean>
+    
+
     <div id="wrapper">
         <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0">
             <div class="container-fluid d-flex flex-column p-0">
@@ -22,12 +26,12 @@
                 </a>
                 <hr class="sidebar-divider my-0">
                 <ul class="navbar-nav text-light" id="accordionSidebar">
-                    <li class="nav-item"><a class="nav-link active" href="user-profile.html"><i class="fas fa-user"></i><span>Profile</span></a></li>
-                    <li class="nav-item"><a class="nav-link" href="notes.html"><i class="fas fa-table"></i><span>Check Personal Notes</span></a></li>
-                    <li class="nav-item"><a class="nav-link" href="search-questions.html"><i class="fas fa-table"></i><span>Search Questions</span></a></li>
-                    <li class="nav-item"><a class="nav-link" href="bookmark.html"><i class="fas fa-table"></i><span>BookMarked Questions</span></a></li>
-                    <li class="nav-item"><a class="nav-link" href="ask-question.html"><i class="fas fa-table"></i><span>Ask Question</span></a></li>
-                    <li class="nav-item"><a class="nav-link" href="request-topic.html"><i class="fas fa-table"></i><span>Request New Topic</span></a></li>
+                    <li class="nav-item"><a class="nav-link active" href="user-profile.jsp"><i class="fas fa-user"></i><span>Profile</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="notes.jsp"><i class="fas fa-table"></i><span>Check Personal Notes</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="search-questions.jsp"><i class="fas fa-table"></i><span>Search Questions</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="bookmark.jsp"><i class="fas fa-table"></i><span>BookMarked Questions</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="ask-question.jsp"><i class="fas fa-table"></i><span>Ask Question</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="request-topic.jsp"><i class="fas fa-table"></i><span>Request New Topic</span></a></li>
 
                 </ul>
                 <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button></div>
@@ -80,77 +84,16 @@
                                     </thead>
                                     <tbody>
 
-                                        <tr>
-                                            <td><a href="question-detail.html">What does ACID stand for in Database?</a></td>
-                                            <td>Database</td>
-                                        </tr>
-
+                                        <% for(int i=0;i<questions.getcount();i++){ %>
 
                                         <tr>
-                                            <td><a href="question-detail.html">Why do we use Transactions in Database?</a></td>
-                                            <td>Database</td>
+                                            <td><a href="question-detail.jsp"><jsp:getProperty name="questions" property="statement"/></a></td>
+                                            <td><jsp:getProperty name="questions" property="category"/></td>
                                         </tr>
 
-                                        <tr>
-                                            <td><a href="question-detail.html">What is Difference Between Dynamic and Static Ploymorphism?</a></td>
-                                            <td>OOP</td>
-                                        </tr>
+                                        <% } questions.resetIndex();  %>
 
-                                        <tr>
-                                            <td><a href="question-detail.html">What is Ton for Air Conditioner mean?</a></td>
-                                            <td>General</td>
-                                        </tr>
-
-                                        <tr>
-                                            <td><a href="question-detail.html">What are Draw Backs of Inheritance?</a></td>
-                                            <td>OOP</td>
-                                        </tr>
-
-                                        <tr>
-                                            <td><a href="question-detail.html">What is Static in Java Programming? </a></td>
-                                            <td>OOP</td>
-                                        </tr>
-
-                                        <tr>
-                                            <td>
-                                                <a href="question-detail.html">What is the one thing that you would like to do in your Life?</a>
-                                                <td>General</td>
-                                            </td>
-                                        </tr>
-
-                                        <tr>
-                                            <td>
-                                                <a href="question-detail.html">Who was Dena Wadia?</a>
-                                                <td>General Knowledge</td>
-                                            </td>
-                                        </tr>
-
-                                        <tr>
-                                            <td>
-                                                <a href="question-detail.html">Who was Emma Wegenast?</a>
-                                                <td>General Knowledge</td>
-                                            </td>
-                                        </tr>
-
-                                        <tr>
-                                            <td><a href="question-detail.html">Why main() function is static in Java and NOT in C++ Programming Language?</a></td>
-                                            <td>Java Programming (OOP)</td>
-                                        </tr>
-
-                                        <tr>
-                                            <td><a href="question-detail.html">Why we don't Need Object Reference to call a Static Function?</a></td>
-                                            <td>OOP</td>
-                                        </tr>
-
-                                        <tr>
-                                            <td><a href="question-detail.html">Why do we need Trees eventhough we have LinkedLists?</a></td>
-                                            <td>Data Structures</td>
-                                        </tr>
-
-                                        <tr>
-                                            <td><a href="question-detail.html">Why we have to make Constructor and Destructor Virtual in C++ while implementing Ploymorphism?</a></td>
-                                            <td>C++ Programming</td>
-                                        </tr>
+                                        
 
                                     </tbody>
 

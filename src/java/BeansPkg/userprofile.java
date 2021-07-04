@@ -5,7 +5,9 @@
  */
 package BeansPkg;
 
+import mainPkg.databaseClass;
 import java.io.Serializable;
+import java.util.HashMap;
 
 /**
  *
@@ -26,33 +28,50 @@ public class userprofile implements Serializable{
         
     }
     
-    
-    
+    public void getData(String email){
+        
+     this.email=email;
+        
+     databaseClass obj=new databaseClass();
+     
+     HashMap<String, String> userData=obj.getUserData(email);
+     
+     this.ID=Integer.parseInt(userData.get("ID"));
+     this.fName=userData.get("fName");
+     this.lName=userData.get("lName");
+     this.address=userData.get("address");
+     this.city=userData.get("city");
+     this.province=userData.get("province");
+    }
     public int getID(){
         return ID;
     }
     
-    public String getEmail(){
+    public String getemail(){
         return email;
     }
     
-    public String getFName(){
+    public String getfName(){
         return fName;
     }
     
-    public String getLName(){
+    public String getlName(){
         return lName;
     }
     
-    public String getAddress(){
+    public String getfullName(){
+        return fName+" "+lName;
+    }
+    
+    public String getaddress(){
         return address;
     }
     
-    public String getCity(){
+    public String getcity(){
         return city;
     }
     
-    public String getProvince(){
+    public String getprovince(){
         return province;
     }
     

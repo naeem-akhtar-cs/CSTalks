@@ -30,14 +30,14 @@
                 </a>
                 <hr class="sidebar-divider my-0">
                 <ul class="navbar-nav text-light" id="accordionSidebar">
-                    <li class="nav-item"><a class="nav-link active" href="admin-dashboard.html"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a></li>
-                    <li class="nav-item"><a class="nav-link" href="admin-profile.html"><i class="fas fa-user"></i><span>Profile</span></a></li>
-                    <li class="nav-item"><a class="nav-link" href="table.html"><i class="fas fa-table"></i><span>Users</span></a></li>
-                    <li class="nav-item"><a class="nav-link" href="topics.html"><i class="fas fa-table"></i><span>Topics</span></a></li>
-                    <li class="nav-item"><a class="nav-link" href="delete-question.html"><i class="fas fa-table"></i><span>Delete Question</span></a></li>
-                    <li class="nav-item"><a class="nav-link" href="add-topic.html"><i class="fas fa-table"></i><span>Add Topic</span></a></li>
-                    <li class="nav-item"><a class="nav-link" href="requested-topics.html"><i class="fas fa-table"></i><span>Requested Topics</span></a></li>
-                    <li class="nav-item"><a class="nav-link" href="delete-question-requests.html"><i class="fas fa-table"></i><span>Reported Questions</span></a></li>
+                    <li class="nav-item"><a class="nav-link active" href="admin-dashboard.jsp"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="admin-profile.jsp"><i class="fas fa-user"></i><span>Profile</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="table.jsp"><i class="fas fa-table"></i><span>Users</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="topics.jsp"><i class="fas fa-table"></i><span>Topics</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="delete-question.jsp"><i class="fas fa-table"></i><span>Delete Question</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="add-topic.jsp"><i class="fas fa-table"></i><span>Add Topic</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="requested-topics.jsp"><i class="fas fa-table"></i><span>Requested Topics</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="delete-question-requests.jsp"><i class="fas fa-table"></i><span>Reported Questions</span></a></li>
 
                 </ul>
                 <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button></div>

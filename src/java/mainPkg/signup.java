@@ -1,3 +1,5 @@
+package mainPkg;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletConfig;
@@ -38,7 +40,7 @@ public class signup extends HttpServlet {
             databaseClass obj=new databaseClass();
             obj.DBSignUP(fName, lName, email, password, repeatPassword);
             
-            response.sendRedirect("register.html");
+            response.sendRedirect("register.jsp");
             
 //            if(obj.DBSignUP(fName, lName, email, password, repeatPassword)){
 //                response.sendRedirect("user-profile.html");

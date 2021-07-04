@@ -1,3 +1,5 @@
+package mainPkg;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -12,6 +14,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -34,13 +37,16 @@ public class login extends HttpServlet {
                 
                 ServletContext context=getServletContext();
                 
-                RequestDispatcher RD=context.getRequestDispatcher("/user-profile.jsp");
-                RD.include(request, response);
+                //RequestDispatcher RD=context.getRequestDispatcher("/user-profile.jsp");
+                //RD.include(request, response);
                 
-                //response.sendRedirect("user-profile.jsp");
+                HttpSession session=request.getSession();
+                session.setAttribute("email", email);
+                
+                response.sendRedirect("user-profile.jsp");
             }
             else{
-                response.sendRedirect("login.html");
+                response.sendRedirect("login.jsp");
             }
         }
         catch(Exception ex){

@@ -13,6 +13,10 @@
 </head>
 
 <body id="page-top">
+
+    <jsp:useBean id ="user" class = "BeansPkg.userprofile" scope="application"></jsp:useBean>
+    <% user.getData((String)session.getAttribute("email")); %>
+
     <div id="wrapper">
         <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0">
             <div class="container-fluid d-flex flex-column p-0">
@@ -22,12 +26,12 @@
                 </a>
                 <hr class="sidebar-divider my-0">
                 <ul class="navbar-nav text-light" id="accordionSidebar">
-                    <li class="nav-item"><a class="nav-link active" href="user-profile.html"><i class="fas fa-user"></i><span>Profile</span></a></li>
-                    <li class="nav-item"><a class="nav-link" href="notes.html"><i class="fas fa-table"></i><span>Check Personal Notes</span></a></li>
-                    <li class="nav-item"><a class="nav-link" href="search-questions.html"><i class="fas fa-table"></i><span>Search Questions</span></a></li>
-                    <li class="nav-item"><a class="nav-link" href="bookmark.html"><i class="fas fa-table"></i><span>BookMarked Questions</span></a></li>
-                    <li class="nav-item"><a class="nav-link" href="ask-question.html"><i class="fas fa-table"></i><span>Ask Question</span></a></li>
-                    <li class="nav-item"><a class="nav-link" href="request-topic.html"><i class="fas fa-table"></i><span>Request New Topic</span></a></li>
+                    <li class="nav-item"><a class="nav-link active" href="user-profile.jsp"><i class="fas fa-user"></i><span>Profile</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="notes.jsp"><i class="fas fa-table"></i><span>Check Personal Notes</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="search-questions.jsp"><i class="fas fa-table"></i><span>Search Questions</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="bookmark.jsp"><i class="fas fa-table"></i><span>BookMarked Questions</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="ask-question.jsp"><i class="fas fa-table"></i><span>Ask Question</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="request-topic.jsp"><i class="fas fa-table"></i><span>Request New Topic</span></a></li>
 
                 </ul>
                 <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button></div>
@@ -59,7 +63,7 @@
                             </li>
 
                             <li class="nav-item dropdown no-arrow">
-                                <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link" aria-expanded="false" data-toggle="dropdown" href="#"><span class="d-none d-lg-inline mr-2 text-gray-600 small">Naeem Akhtar</span><img class="border rounded-circle img-profile" src="assets/img/avatars/avatar1.png"></a>
+                                <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link" aria-expanded="false" data-toggle="dropdown" href="#"><span class="d-none d-lg-inline mr-2 text-gray-600 small"><jsp:getProperty name="user" property="fullName"/></span><img class="border rounded-circle img-profile" src="assets/img/avatars/avatar1.png"></a>
                                     <div class="dropdown-menu shadow dropdown-menu-right animated--grow-in"><a class="dropdown-item" href="#"><i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Profile</a>
 
                                         <div class="dropdown-divider"></div><a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Logout</a>
@@ -91,18 +95,20 @@
                                             <form>
                                                 <div class="form-row">
                                                     <div class="col">
-                                                        <div class="form-group"><label for="username"><strong>User ID</strong></label><input class="form-control" type="text" id="username" placeholder="23" name="username"></div>
+                                                        <div class="form-group"><label for="username"><strong>User ID</strong></label><input class="form-control" type="text" id="username" 
+                                                            value=<jsp:getProperty name="user" property="ID"/>
+                                                            name="username" readonly></div>
                                                     </div>
                                                     <div class="col">
-                                                        <div class="form-group"><label for="email"><strong>Email Address</strong></label><input class="form-control" type="email" id="email" placeholder="naeem.akhtar.cs@gmail.com" name="email"></div>
+                                                        <div class="form-group"><label for="email"><strong>Email Address</strong></label><input class="form-control" type="email" id="email" value=<jsp:getProperty name="user" property="email"/> name="email"></div>
                                                     </div>
                                                 </div>
                                                 <div class="form-row">
                                                     <div class="col">
-                                                        <div class="form-group"><label for="first_name"><strong>First Name</strong></label><input class="form-control" type="text" id="first_name" placeholder="Naeem" name="first_name"></div>
+                                                        <div class="form-group"><label for="first_name"><strong>First Name</strong></label><input class="form-control" type="text" id="first_name" value=<jsp:getProperty name="user" property="fName"/> name="first_name"></div>
                                                     </div>
                                                     <div class="col">
-                                                        <div class="form-group"><label for="last_name"><strong>Last Name</strong></label><input class="form-control" type="text" id="last_name" placeholder="Akhtar" name="last_name"></div>
+                                                        <div class="form-group"><label for="last_name"><strong>Last Name</strong></label><input class="form-control" type="text" id="last_name" value=<jsp:getProperty name="user" property="lName"/> name="last_name"></div>
                                                     </div>
                                                 </div>
                                                 <div class="form-group"><button class="btn btn-primary btn-sm" type="submit">Save Settings</button></div>
@@ -115,13 +121,13 @@
                                         </div>
                                         <div class="card-body">
                                             <form>
-                                                <div class="form-group"><label for="address"><strong>Address</strong></label><input class="form-control" type="text" id="address" placeholder="Johar Town" name="address"></div>
+                                                <div class="form-group"><label for="address"><strong>Address</strong></label><input class="form-control" type="text" id="address" value="<jsp:getProperty name="user" property="address"/>" name="address"></div>
                                                 <div class="form-row">
                                                     <div class="col">
-                                                        <div class="form-group"><label for="city"><strong>City</strong></label><input class="form-control" type="text" id="city" placeholder="Lahore" name="city"></div>
+                                                        <div class="form-group"><label for="city"><strong>City</strong></label><input class="form-control" type="text" id="city" value=<jsp:getProperty name="user" property="city"/> name="city"></div>
                                                     </div>
                                                     <div class="col">
-                                                        <div class="form-group"><label for="Province"><strong>Province</strong></label><input class="form-control" type="text" id="province" placeholder="Punjab" name="country"></div>
+                                                        <div class="form-group"><label for="Province"><strong>Province</strong></label><input class="form-control" type="text" id="province" value=<jsp:getProperty name="user" property="province"/> name="country"></div>
                                                     </div>
                                                 </div>
                                                 <div class="form-group"><button class="btn btn-primary btn-sm" type="submit">Save&nbsp;Settings</button></div>
