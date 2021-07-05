@@ -25,10 +25,16 @@ public class databaseClass {
     public databaseClass() {
 
         try {
-            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            String s = "jdbc:sqlserver://localhost:1433;databaseName=ap_project";
-            this.con = DriverManager.getConnection(s, "user", "123");
-
+        
+        //Local Database Connection
+        /*Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+        this.con=DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=ap_project","user","123");
+        */
+        
+        //Amazon Remote Database Connection
+        Class.forName("com.mysql.jdbc.Driver");       
+        this.con=DriverManager.getConnection("jdbc:mysql://ls-2443773d57df68ead19c2450b12c6e6268f31f3f.c1whsvsm4xkg.ap-southeast-1.rds.amazonaws.com:3306/ap_project?characterEncoding=latin1&useConfigs=maxPerformance","user","Kz<)K{3&JIg~_vnXgL=y~5>JZDci*Bmp");
+        
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -40,6 +46,8 @@ public class databaseClass {
 
         try {
 
+            //First CHeck if email entered already exists or not
+            
 //            String str = "select* from common_user";
 //            Statement stmt1 = con.createStatement();
 //            ResultSet rs1 = stmt1.executeQuery(str);
