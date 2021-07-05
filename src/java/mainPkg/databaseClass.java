@@ -148,8 +148,8 @@ public class databaseClass {
         ArrayList<HashMap<String, String>> questions = new ArrayList<>();
 
         try {
-            String query = "select question_statement, title as categoryTitle from questions join categories on "
-                    + "questions.ID=categories.ID";
+            String query = "select question_statement, title as categoryTitle from questions "
+                    +"left join categories on questions.category=categories.ID";
 
             PreparedStatement PS = con.prepareStatement(query);
 

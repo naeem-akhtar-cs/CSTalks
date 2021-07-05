@@ -123,3 +123,5 @@ select* from questions
 select* from categories
 select* from requestedTopics
 select* from bookmarks
+
+select question_statement, title as categoryTitle from questions left join categories on questions.category=categories.ID

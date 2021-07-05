@@ -23,7 +23,6 @@
     <jsp:useBean id = "questions" class = "BeansPkg.questionshelper" scope="page"></jsp:useBean>
   
         
-
     <div id="wrapper">
         
         <jsp:include page="menu.jsp" />
