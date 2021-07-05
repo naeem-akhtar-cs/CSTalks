@@ -6,7 +6,7 @@ Front End of Web-based Application to ask questions and discuss any topic.
 This is web application for students to ask questions related to interviews in job market.
 
 ## NOTE: 
-Project is incomplete and this is just the front End of Application. Description will be updated as soon Back End is Developed. 
+Project is under progress and some of the backend functionalities are not implemented completely.
 
 ## Functions
   1. Sign Up
