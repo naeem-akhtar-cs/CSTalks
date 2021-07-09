@@ -10,22 +10,46 @@
                 user.getData((String)session.getAttribute("email")); 
             }
             %>
-
-        <form class="form-inline d-none d-sm-inline-block mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-            <div class="input-group"><input class="bg-light form-control border-0 small" type="text" placeholder="Add Note">
-                <div class="input-group-append"><button class="btn btn-primary py-0" type="button"><strong>+</strong></button></div>
+        
+        <form class="form-inline d-none d-sm-inline-block mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search" method="POST" action="http://localhost:8080/CSTalks/addNote" name="add-note">
+            <div class="input-group">
+                <input class="bg-light form-control border-0 small" name="note" id="note1" type="text" placeholder="Add Note">
+                <button class="btn btn-primary py-0" type="submit">+</button>        
             </div>
         </form>
+
+        
+        <!-- Sending note without refreshing the page -->
+
+        <script>
+            function ajaxpost(){
+              // (A) GET FORM DATA
+              var data = new FormData();
+              data.append("name", document.getElementById("note1").value);
+             
+              // (B) AJAX
+              var xhr = new XMLHttpRequest();
+              xhr.open("POST", "http://localhost:8080/CSTalks/addNote");
+              // What to do when server responds
+              xhr.onload = function(){ console.log(this.response); };
+              xhr.send(data);
+             
+              // (C) PREVENT HTML FORM SUBMIT
+              return false;
+            }
+        </script>
 
 
         <ul class="navbar-nav flex-nowrap ml-auto">
             <li class="nav-item dropdown d-sm-none no-arrow"><a class="dropdown-toggle nav-link" aria-expanded="false" data-toggle="dropdown" href="#"><i class="fas fa-search"></i></a>
                 <div class="dropdown-menu dropdown-menu-right p-3 animated--grow-in" aria-labelledby="searchDropdown">
-                    <form class="form-inline mr-auto navbar-search w-100">
-                        <div class="input-group"><input class="bg-light form-control border-0 small" type="text" placeholder="Search for ...">
+                    
+                    <form class="form-inline mr-auto navbar-search w-100" method="POST" action="http://localhost:8080/CSTalks/addNote" name="add-note">
+                        <div class="input-group"><input class="bg-light form-control border-0 small" type="text" placeholder="Add note">
                             <div class="input-group-append"><button class="btn btn-primary py-0" type="button"><i class="fas fa-search"></i></button></div>
                         </div>
                     </form>
+                    
                 </div>
             </li>
 

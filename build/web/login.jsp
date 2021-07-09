@@ -81,11 +81,7 @@
                                                 
                                                 <button class="btn btn-primary btn-block text-white btn-user" type="submit">Login</button>
                                             </form>
-
-                                            </br>
-                                            <a href="admin-dashboard.jsp">Admin Dash (Temp Button)</a>
-                                            </br>
-                                            <a href="user-profile.jsp">User Dash (Temp Button)</a>
+                                            
                                             <hr>
 
                                             <div class="text-center"><a class="small" href="register.jsp">Create an

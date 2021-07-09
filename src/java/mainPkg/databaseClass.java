@@ -268,7 +268,7 @@ public class databaseClass {
             PS2.setInt(3, categoryID);
             PS2.setString(4, dtf.format(now));
             
-            PS2.executeQuery();
+            PS2.executeUpdate();
             
             con.close();
             
@@ -277,6 +277,42 @@ public class databaseClass {
         }
         
     }
+    
+    public void addNote(String email, String note){
+        try {
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+            LocalDateTime now = LocalDateTime.now();
+            
+            String query="select ID from common_user where common_user.email=?";
+            
+            PreparedStatement PS=con.prepareStatement(query);
+            
+            PS.setString(1, email);
+            
+            ResultSet RS=PS.executeQuery();
+            
+            RS.next();
+            
+            int ownerID=Integer.parseInt(RS.getString("ID"));
+            
+            String query1="insert into notes values(?,?,?)";
+            
+            PreparedStatement PS1=con.prepareStatement(query1);
+            
+            PS1.setInt(1, ownerID);
+            PS1.setString(2, note);
+            PS1.setString(3, dtf.format(now));
+            
+            PS1.executeUpdate();
+            
+            con.close();
+            
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        
+    }
+    
     
     public ArrayList<HashMap<String, String>> getNotes(String email){
         

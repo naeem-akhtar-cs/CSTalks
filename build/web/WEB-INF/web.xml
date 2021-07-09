@@ -28,6 +28,10 @@
         <servlet-name>requestTopic</servlet-name>
         <servlet-class>mainPkg.requestTopic</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>addNote</servlet-name>
+        <servlet-class>mainPkg.addNote</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>signup</servlet-name>
         <url-pattern>/signup</url-pattern>
@@ -51,6 +55,10 @@
     <servlet-mapping>
         <servlet-name>requestTopic</servlet-name>
         <url-pattern>/requestTopic</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>addNote</servlet-name>
+        <url-pattern>/addNote</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

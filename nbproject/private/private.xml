@@ -3,16 +3,19 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/naeem/OneDrive/Documents/NetBeansProjects/CSTalks/src/java/mainPkg/login.java</file>
-            <file>file:/C:/Users/naeem/OneDrive/Documents/NetBeansProjects/CSTalks/src/java/mainPkg/databaseClass.java</file>
             <file>file:/C:/Users/naeem/OneDrive/Documents/NetBeansProjects/CSTalks/src/java/BeansPkg/userprofile.java</file>
             <file>file:/C:/Users/naeem/OneDrive/Documents/NetBeansProjects/CSTalks/src/java/BeansPkg/question.java</file>
+            <file>file:/C:/Users/naeem/OneDrive/Documents/NetBeansProjects/CSTalks/web/WEB-INF/web.xml</file>
+            <file>file:/C:/Users/naeem/OneDrive/Documents/NetBeansProjects/CSTalks/web/notes.jsp</file>
+            <file>file:/C:/Users/naeem/OneDrive/Documents/NetBeansProjects/CSTalks/src/java/mainPkg/signup.java</file>
+            <file>file:/C:/Users/naeem/OneDrive/Documents/NetBeansProjects/CSTalks/src/java/BeansPkg/questionshelper.java</file>
+            <file>file:/C:/Users/naeem/OneDrive/Documents/NetBeansProjects/CSTalks/web/user-profile.jsp</file>
+            <file>file:/C:/Users/naeem/OneDrive/Documents/NetBeansProjects/CSTalks/web/login.jsp</file>
+            <file>file:/C:/Users/naeem/OneDrive/Documents/NetBeansProjects/CSTalks/src/java/mainPkg/login.java</file>
+            <file>file:/C:/Users/naeem/OneDrive/Documents/NetBeansProjects/CSTalks/src/java/mainPkg/databaseClass.java</file>
             <file>file:/C:/Users/naeem/OneDrive/Documents/NetBeansProjects/CSTalks/src/java/BeansPkg/categoriesHelper.java</file>
             <file>file:/C:/Users/naeem/OneDrive/Documents/NetBeansProjects/CSTalks/src/java/BeansPkg/showBookMark.java</file>
-            <file>file:/C:/Users/naeem/OneDrive/Documents/NetBeansProjects/CSTalks/web/WEB-INF/web.xml</file>
-            <file>file:/C:/Users/naeem/OneDrive/Documents/NetBeansProjects/CSTalks/src/java/mainPkg/signup.java</file>
             <file>file:/C:/Users/naeem/OneDrive/Documents/NetBeansProjects/CSTalks/src/java/BeansPkg/category.java</file>
-            <file>file:/C:/Users/naeem/OneDrive/Documents/NetBeansProjects/CSTalks/src/java/BeansPkg/questionshelper.java</file>
             <file>file:/C:/Users/naeem/OneDrive/Documents/NetBeansProjects/CSTalks/src/conf/MANIFEST.MF</file>
         </group>
     </open-files>

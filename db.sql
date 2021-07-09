@@ -4,7 +4,7 @@ ID int primary key
 ,fName varchar(40)
 ,lName varchar(40)
 ,date_joined varchar(40)
-,user_status int  --1 if active and 0 otherwise 
+,user_status int  -- 1 if active and 0 otherwise 
 ,user_password varchar(200)
 ,useraddress varchar(60)
 ,city varchar(40)
@@ -116,12 +116,12 @@ insert into bookMarks values (5,2,25)
 insert into bookMarks values (6,1,29)
 
 
-select* from requestedTopics
-select* from notes
-select* from common_user
-select* from questions
-select* from categories
-select* from requestedTopics
-select* from bookmarks
+select* from requestedTopics;
+select* from notes;
+select* from common_user;
+select* from questions;
+select* from categories;
+select* from requestedTopics;
+select* from bookMarks;
 
 select question_statement, title as categoryTitle from questions left join categories on questions.category=categories.ID
