@@ -8,6 +8,12 @@ This is web application for students to ask questions related to interviews in j
 ## NOTE: 
 Project is under progress and some of the backend functionalities are not implemented completely.
 
+## Group Members
+  1. Naeem Akhtar
+  2. Sameen Akram
+  3. Ahmad Waheed
+  4. Samran Waheed
+
 ## Functions
   1. Sign Up
   2. Sign In
