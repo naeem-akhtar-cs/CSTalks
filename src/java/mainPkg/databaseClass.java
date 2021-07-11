@@ -1,5 +1,7 @@
 package mainPkg;
 
+import BeansPkg.answer;
+import BeansPkg.questionDetailPage;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -17,7 +19,6 @@ import java.util.logging.Logger;
  *
  * @author naeem
  */
-
 public class databaseClass {
 
     private Connection con;
@@ -25,16 +26,15 @@ public class databaseClass {
     public databaseClass() {
 
         try {
-        
-        //Local Database Connection
-        /*Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+
+            //Local Database Connection
+            /*Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
         this.con=DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=ap_project","user","123");
-        */
-        
-        //Amazon Remote Database Connection
-        Class.forName("com.mysql.jdbc.Driver");       
-        this.con=DriverManager.getConnection("jdbc:mysql://ls-2443773d57df68ead19c2450b12c6e6268f31f3f.c1whsvsm4xkg.ap-southeast-1.rds.amazonaws.com:3306/ap_project?characterEncoding=latin1&useConfigs=maxPerformance","user","Kz<)K{3&JIg~_vnXgL=y~5>JZDci*Bmp");
-        
+             */
+            //Amazon Remote Database Connection
+            Class.forName("com.mysql.jdbc.Driver");
+            this.con = DriverManager.getConnection("jdbc:mysql://ls-2443773d57df68ead19c2450b12c6e6268f31f3f.c1whsvsm4xkg.ap-southeast-1.rds.amazonaws.com:3306/ap_project?characterEncoding=latin1&useConfigs=maxPerformance", "user", "Kz<)K{3&JIg~_vnXgL=y~5>JZDci*Bmp");
+
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -47,7 +47,6 @@ public class databaseClass {
         try {
 
             //First CHeck if email entered already exists or not
-            
 //            String str = "select* from common_user";
 //            Statement stmt1 = con.createStatement();
 //            ResultSet rs1 = stmt1.executeQuery(str);
@@ -157,7 +156,7 @@ public class databaseClass {
 
         try {
             String query = "select question_statement, title as categoryTitle from questions "
-                    +"left join categories on questions.category=categories.ID";
+                    + "left join categories on questions.category=categories.ID";
 
             PreparedStatement PS = con.prepareStatement(query);
 
@@ -192,7 +191,7 @@ public class databaseClass {
             PreparedStatement PS = con.prepareStatement(query);
 
             PS.setString(1, email);
-            
+
             ResultSet RS = PS.executeQuery();
 
             while (RS.next()) {
@@ -210,7 +209,7 @@ public class databaseClass {
         }
         return questions;
     }
-    
+
     public ArrayList<String> getCategories() {
         ArrayList<String> list = new ArrayList<>();
 
@@ -222,7 +221,7 @@ public class databaseClass {
             ResultSet RS = PS.executeQuery();
 
             while (RS.next()) {
-               list.add(RS.getString("title"));
+                list.add(RS.getString("title"));
             }
             con.close();
         } catch (Exception ex) {
@@ -231,100 +230,96 @@ public class databaseClass {
         return list;
     }
 
-    public void insertQuestion(String statement, String category){
+    public void insertQuestion(String statement, String category) {
         try {
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
             LocalDateTime now = LocalDateTime.now();
-            
+
             Statement stmt = con.createStatement();
             String s1 = "select max(ID) as ID from questions";
             ResultSet rs = stmt.executeQuery(s1);
             rs.next();
             int question_ID = Integer.parseInt(rs.getString("ID")); //Getting Max Existing ID of Questions
-            
-            
-            String query="select ID from categories where categories.title=?";
-            
-            PreparedStatement PS=con.prepareStatement(query);
-            
+
+            String query = "select ID from categories where categories.title=?";
+
+            PreparedStatement PS = con.prepareStatement(query);
+
             PS.setString(1, category);
-            
-            ResultSet RS=PS.executeQuery();
-            
+
+            ResultSet RS = PS.executeQuery();
+
             RS.next();
-            
-            int categoryID=Integer.parseInt(RS.getString("ID"));
-            
-            String query2="insert into questions values(?,?,?,?)";
-            
-            PreparedStatement PS2=con.prepareStatement(query2);
-            
-            
-            
+
+            int categoryID = Integer.parseInt(RS.getString("ID"));
+
+            String query2 = "insert into questions values(?,?,?,?)";
+
+            PreparedStatement PS2 = con.prepareStatement(query2);
+
             question_ID++;
-            
+
             PS2.setInt(1, question_ID);
             PS2.setString(2, statement);
             PS2.setInt(3, categoryID);
             PS2.setString(4, dtf.format(now));
-            
+
             PS2.executeUpdate();
-            
+
             con.close();
-            
+
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        
+
     }
-    
-    public void addNote(String email, String note){
+
+    public void addNote(String email, String note) {
         try {
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
             LocalDateTime now = LocalDateTime.now();
-            
-            String query="select ID from common_user where common_user.email=?";
-            
-            PreparedStatement PS=con.prepareStatement(query);
-            
+
+            String query = "select ID from common_user where common_user.email=?";
+
+            PreparedStatement PS = con.prepareStatement(query);
+
             PS.setString(1, email);
-            
-            ResultSet RS=PS.executeQuery();
-            
+
+            ResultSet RS = PS.executeQuery();
+
             RS.next();
-            
-            int ownerID=Integer.parseInt(RS.getString("ID"));
-            
-            String query1="insert into notes values(?,?,?)";
-            
-            PreparedStatement PS1=con.prepareStatement(query1);
-            
+
+            int ownerID = Integer.parseInt(RS.getString("ID"));
+
+            String query1 = "insert into notes values(?,?,?)";
+
+            PreparedStatement PS1 = con.prepareStatement(query1);
+
             PS1.setInt(1, ownerID);
             PS1.setString(2, note);
             PS1.setString(3, dtf.format(now));
-            
+
             PS1.executeUpdate();
-            
+
             con.close();
-            
+
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        
+
     }
-    
-    
-    public ArrayList<HashMap<String, String>> getNotes(String email){
-        
+
+    public ArrayList<HashMap<String, String>> getNotes(String email) {
+
         ArrayList<HashMap<String, String>> notes = new ArrayList<>();
 
         try {
             String query = "select note, date_added from notes join common_user on notes.owner_id=common_user.ID where common_user.email=?";
-            
+
             PreparedStatement PS = con.prepareStatement(query);
-            
+
             PS.setString(1, email);
-            
+
             ResultSet RS = PS.executeQuery();
 
             while (RS.next()) {
@@ -342,41 +337,108 @@ public class databaseClass {
         }
         return notes;
     }
-    
-    public void addRequestedTopic(String topic, String email){
+
+    public void addRequestedTopic(String topic, String email) {
         try {
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
             LocalDateTime now = LocalDateTime.now();
-            
-            
-            String query="select ID from common_user where email=?";
-            
-            PreparedStatement PS=con.prepareStatement(query);
-            
+
+            String query = "select ID from common_user where email=?";
+
+            PreparedStatement PS = con.prepareStatement(query);
+
             PS.setString(1, email);
-            
-            ResultSet RS=PS.executeQuery();
-            
+
+            ResultSet RS = PS.executeQuery();
+
             RS.next();
-            
-            int userID=Integer.parseInt(RS.getString("ID"));
-            
-            
-            String query1="insert into requestedTopics values(?,?,?)";
-            
-            PreparedStatement PS1=con.prepareStatement(query1);
-            
+
+            int userID = Integer.parseInt(RS.getString("ID"));
+
+            String query1 = "insert into requestedTopics values(?,?,?)";
+
+            PreparedStatement PS1 = con.prepareStatement(query1);
+
             PS1.setString(1, topic);
             PS1.setString(2, dtf.format(now));
             PS1.setInt(3, userID);
-            
-            
+
             PS1.executeQuery();
-            
+
             con.close();
-            
+
         } catch (Exception ex) {
             ex.printStackTrace();
         }
+    }
+
+    public HashMap getQuestionDetails(String question) {
+
+        HashMap questionDetail=new HashMap<>();
+        
+        try {
+
+            String IDQuery = "select ID from questions where questions.question_statement=?";
+
+            PreparedStatement PS = con.prepareStatement(IDQuery);
+
+            PS.setString(1, question);
+
+            ResultSet RS = PS.executeQuery();
+
+            RS.next();
+
+            int questionID = RS.getInt("ID");
+
+            String questionQuery = "select question_statement, date_added, fName, lName from questions left join common_user "
+                    + "on questions.askedBy=common_user.ID where questions.ID=?";
+
+            PreparedStatement PS1 = con.prepareStatement(questionQuery);
+
+            PS1.setInt(1, questionID);
+
+            ResultSet RS1 = PS1.executeQuery();
+            RS1.next();
+
+            String statement = RS1.getString("question_statement");
+            //RS1.next();
+
+            String dateAsked = RS1.getString("date_added");
+            //RS1.next();
+            
+            String postedByFName = RS1.getString("fName");
+            //RS1.next();
+            
+            String postedByLName = RS1.getString("lName");
+            //RS1.next();
+            
+            String answerQuery = "select statement, fName, lName, dateAnswered from answers left join "
+                    + "common_user on answers.ownerID=common_user.ID where answers.questionID=?";
+
+            PreparedStatement PS3 = con.prepareStatement(answerQuery);
+
+            PS3.setInt(1, questionID);
+
+            ResultSet RS3 = PS3.executeQuery();
+
+            ArrayList<answer> answers = new ArrayList<>();
+
+            while (RS3.next()) {
+                answer ans = new answer(RS3.getString("statement"), 
+                        RS3.getString("fName") + " " + RS3.getString("lName"), RS3.getString("dateAnswered"));
+                answers.add(ans);
+            }
+            
+            
+            questionDetail.put("dateAsked", dateAsked);
+            questionDetail.put("postedBy", postedByFName+" "+postedByLName);
+            questionDetail.put("statement", statement);
+            questionDetail.put("answers", answers);
+
+            con.close();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return questionDetail;
     }
 }

@@ -63,11 +63,7 @@
                 
                 <jsp:include page="navigation.jsp" />
 
-
-                <!--
-
-    Your Code Goes Here
--->
+                <% String requestURL=request.getRequestURL().toString(); %>
 
                 <div class="container-fluid">
                     <h2 class="text-dark mb-4">OOP</h2>
@@ -109,33 +105,7 @@
                         <p style="text-align:right">Answered : Sep 20, 1999</p>
 
                         <hr>
-                        <!-- Answer 2-->
-
-                        <p class="text-dark mb-4">Often, data members in the base class are left unused which may lead to memory wastage.</p>
-                        <div class="d-table w-100">
-                            <button class="btn success">UpVote</button>
-                            <button class="btn danger">DownVote</button>
-                            <div class="d-table-cell tar">
-                                <p style="text-align:right">Posted by : <span style="float : right;"><a href="#" >Sameen Akram</a></span></p>
-                            </div>
-                        </div>
-                        <p style="text-align:right">Answered : Sep 20, 1999</p>
-
-                        <hr>
-
-                        <!-- Answer 3-->
-
-                        <p class="text-dark mb-4">Inheritance increases the coupling between base class and derived class. A change in base class will affect all the child classes.</p>
-                        <div class="d-table w-100">
-                            <button class="btn1 success">UpVote</button>
-                            <button class="btn1 danger">DownVote</button>
-                            <div class="d-table-cell tar">
-                                <p style="text-align:right">Posted by : <span style="float : right;"><a href="#" >Sameen Akram</a></span></p>
-                            </div>
-                        </div>
-                        <p style="text-align:right">Answered : Sep 20, 1999</p>
-
-                        <hr>
+                        
 
                         <div class="container-fluid">
                             <h3 class="text-dark mb-4">Answer this question</h3>
