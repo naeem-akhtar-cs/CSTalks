@@ -129,15 +129,6 @@ insert into bookMarks values (4,8,35);
 insert into bookMarks values (5,2,25);
 insert into bookMarks values (6,1,29);
 
-
-select* from requestedTopics;
-select* from notes;
-select* from common_user;
-select* from questions;
-select* from categories;
-select* from requestedTopics;
-select* from bookMarks;
-
 delete from notes where notes.owner_id=25;
 
 select question_statement, title as categoryTitle from questions left join categories on questions.category=categories.ID;
@@ -169,4 +160,48 @@ update answers
 set questionID=5
 where ID<4;
 
+create table admin_user(
+ID int primary key
+,email varchar (40)
+,fName varchar(40)
+,lName varchar(40)
+,user_password varchar(200)
+,useraddress varchar(60)
+,city varchar(40)
+,province varchar(40)
+);
+
+insert admin_user values (1,'admin@cstalks.com', 'Amjad', 'Sabri', 'amjad78sabri', 'Gulshan Iqbal', 'Karachi', 'Sindh');
+
+create table reportedQuestions(
+questionID int
+,dateReported varchar(20)
+,reportedBy int 
+,foreign key reportedQuestions1(questionID) references questions(ID)
+,foreign key reportedQuestions2(reportedBy) references common_user(ID)
+);
+
+insert into reportedQuestions values(1,'2021/07/11',28);
+
+create table userLogins(
+userID int
+,loginDate varchar(30)
+,foreign key userLogins(userID) references common_user(ID)
+);
+
+-- drop table  userLogins
+
+select count(*) as count, title from questions as ques join categories on ques.category=categories.ID group by ques.category, categories.title;
+
+select* from requestedTopics;
+select* from notes;
+select* from common_user;
+select* from questions;
+select* from categories;
+select* from requestedTopics;
+select* from bookMarks;
 select* from answers;
+select* from admin_user;
+select* from reportedQuestions;
+select* from userLogins;
+

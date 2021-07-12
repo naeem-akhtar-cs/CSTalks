@@ -1,36 +1,40 @@
-
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package BeansPkg;
 
-import mainPkg.databaseClass;
 import java.io.Serializable;
 import java.util.HashMap;
+import mainPkg.databaseClass;
 
 /**
  *
  * @author naeem
  */
-
-public class userprofile implements Serializable{
+public class adminprofile implements Serializable{
     
-    int ID;
-    String email;
-    String fName;
-    String lName;
-    String address;
-    String city;
-    String province;
+    private int ID;
+    private String email;
+    private String fName;
+    private String lName;
+    private String address;
+    private String city;
+    private String province;
     
     
-    public userprofile(){
+    
+    public adminprofile(){
         
     }
     
     public void getData(String email){
     
        
-     databaseClass obj=new databaseClass();
+     databaseClass DB=new databaseClass();
      
-     HashMap<String, String> userData=obj.getUserData(email);
+     HashMap<String, String> userData=DB.getAdminData(email);
      
      this.ID=Integer.parseInt(userData.get("ID"));
      this.email=userData.get("email");
@@ -39,6 +43,7 @@ public class userprofile implements Serializable{
      this.address=userData.get("address");
      this.city=userData.get("city");
      this.province=userData.get("province");
+
      }
     
     public int getID(){
@@ -72,4 +77,5 @@ public class userprofile implements Serializable{
     public String getprovince(){
         return province;
     }
+
 }

@@ -2,6 +2,7 @@ package mainPkg;
 
 import BeansPkg.answer;
 import BeansPkg.questionDetailPage;
+import BeansPkg.trend;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -94,28 +95,69 @@ public class databaseClass {
         return check;
     }
 
-    public Boolean DBSignin(String useremail, String password) {
+    public int DBSignin(String useremail, String password) {
 
-        Boolean check = false;
+        int check = 0;
 
         try {
             Statement stmt = con.createStatement();
 
-            String s1 = "select user_password from common_user where email='" + useremail + "'";
+            String s1 = "select user_password, ID from common_user where email='" + useremail + "'";
 
             ResultSet rs = stmt.executeQuery(s1);
 
             if (rs.next()) {
 
                 String pass = rs.getString("user_password");
+                int userID = rs.getInt("ID");
 
                 if (pass.equals(password)) {
-                    check = true;
+                    check = 1;
+
+                    String addUser = "insert into userLogins values(?, ?)";
+                    PreparedStatement PS = con.prepareStatement(addUser);
+
+                    DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH/mm/ss");
+                    LocalDateTime now = LocalDateTime.now();
+
+                    PS.setInt(1, userID);
+                    PS.setString(2, dtf.format(now));
+
+                    PS.executeUpdate();
+
                 }
             }
         } catch (SQLException ex) {
             Logger.getLogger(databaseClass.class.getName()).log(Level.SEVERE, null, ex);
         }
+
+        if (check == 0) { //Check credentials for admin
+            try {
+                Statement stmt = con.createStatement();
+
+                String s1 = "select user_password from admin_user where email='" + useremail + "'";
+
+                ResultSet rs = stmt.executeQuery(s1);
+
+                if (rs.next()) {
+
+                    String pass = rs.getString("user_password");
+
+                    if (pass.equals(password)) {
+                        check = 2;
+                    }
+                }
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+
+            try {
+                con.close();
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        }
+
         return check;
     }
 
@@ -148,6 +190,110 @@ public class databaseClass {
             ex.printStackTrace();
         }
         return userData;
+    }
+
+    public HashMap<String, String> getAdminData(String email) {
+
+        HashMap<String, String> userData = new HashMap<>();
+
+        try {
+
+            String query = "select ID, email, fName, lName, useraddress, city, province from admin_user where email=?";
+
+            PreparedStatement PS = con.prepareStatement(query);
+
+            PS.setString(1, email);
+
+            ResultSet RS = PS.executeQuery();
+            RS.next();
+
+            userData.put("ID", RS.getString("ID"));
+            userData.put("email", RS.getString("email"));
+            userData.put("fName", RS.getString("fName"));
+            userData.put("lName", RS.getString("lName"));
+            userData.put("address", RS.getString("useraddress"));
+            userData.put("city", RS.getString("city"));
+            userData.put("province", RS.getString("province"));
+
+            this.con.close();
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return userData;
+    }
+
+    public HashMap getWebsiteStatistics() {
+
+        HashMap webData = new HashMap<>();
+
+        try {
+
+            String query = "select count(*) as usersVisits from userLogins";
+
+            PreparedStatement PS = con.prepareStatement(query);
+
+            ResultSet RS = PS.executeQuery();
+            RS.next();
+
+            webData.put("usersVisits", RS.getInt("usersVisits"));
+
+            
+            
+            String query1 = "select count(*) as questionsCount from questions";
+
+            PreparedStatement PS1 = con.prepareStatement(query1);
+
+            ResultSet RS1 = PS1.executeQuery();
+            RS1.next();
+
+            webData.put("questionsCount", RS1.getInt("questionsCount"));
+
+            
+            
+            String query2 = "select count(*) as answersCount from answers";
+
+            PreparedStatement PS2 = con.prepareStatement(query2);
+
+            ResultSet RS2 = PS2.executeQuery();
+            RS2.next();
+
+            webData.put("answersCount", RS2.getInt("answersCount"));
+
+            
+            
+            String query3 = "select count(*) as reportedCount from reportedQuestions";
+
+            
+            PreparedStatement PS3 = con.prepareStatement(query3);
+
+            ResultSet RS3 = PS3.executeQuery();
+            RS3.next();
+
+            webData.put("reportedCount", RS3.getInt("reportedCount"));
+            
+            String query4="select count(*) as eachCount, title from questions as ques join categories "
+                    + "on ques.category=categories.ID group by ques.category, categories.title "
+                    + "order by eachCount desc limit 5";
+            
+            PreparedStatement PS4 = con.prepareStatement(query4);
+
+            ResultSet RS4 = PS4.executeQuery();
+            
+            ArrayList<trend> trendingTopics=new ArrayList<>();
+            
+            while(RS4.next()){
+                trendingTopics.add(new trend(RS4.getString(2), RS4.getInt(1)));
+            }
+            
+            webData.put("trendingTopics", trendingTopics);
+            
+            con.close();
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return webData;
     }
 
     public ArrayList<HashMap<String, String>> getQuestions() {
@@ -374,8 +520,8 @@ public class databaseClass {
 
     public HashMap getQuestionDetails(String question) {
 
-        HashMap questionDetail=new HashMap<>();
-        
+        HashMap questionDetail = new HashMap<>();
+
         try {
 
             String IDQuery = "select ID from questions where questions.question_statement=?";
@@ -405,13 +551,13 @@ public class databaseClass {
 
             String dateAsked = RS1.getString("date_added");
             //RS1.next();
-            
+
             String postedByFName = RS1.getString("fName");
             //RS1.next();
-            
+
             String postedByLName = RS1.getString("lName");
             //RS1.next();
-            
+
             String answerQuery = "select statement, fName, lName, dateAnswered from answers left join "
                     + "common_user on answers.ownerID=common_user.ID where answers.questionID=?";
 
@@ -424,14 +570,13 @@ public class databaseClass {
             ArrayList<answer> answers = new ArrayList<>();
 
             while (RS3.next()) {
-                answer ans = new answer(RS3.getString("statement"), 
+                answer ans = new answer(RS3.getString("statement"),
                         RS3.getString("fName") + " " + RS3.getString("lName"), RS3.getString("dateAnswered"));
                 answers.add(ans);
             }
-            
-            
+
             questionDetail.put("dateAsked", dateAsked);
-            questionDetail.put("postedBy", postedByFName+" "+postedByLName);
+            questionDetail.put("postedBy", postedByFName + " " + postedByLName);
             questionDetail.put("statement", statement);
             questionDetail.put("answers", answers);
 

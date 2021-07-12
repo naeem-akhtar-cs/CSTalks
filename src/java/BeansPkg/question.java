@@ -5,11 +5,13 @@
  */
 package BeansPkg;
 
+import java.io.Serializable;
+
 /**
  *
  * @author naeem
  */
-public class question {
+public class question implements Serializable{
     private String statement;
     private String category;
     
