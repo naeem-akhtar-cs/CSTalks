@@ -376,11 +376,23 @@ public class databaseClass {
         return list;
     }
 
-    public void insertQuestion(String statement, String category) {
+    public void insertQuestion(String email, String statement, String category) {
         try {
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
             LocalDateTime now = LocalDateTime.now();
 
+            String emailQuery = "select ID from common_user where common_user.email=?";
+
+            PreparedStatement PS5 = con.prepareStatement(emailQuery);
+
+            PS5.setString(1, email);
+
+            ResultSet RS5 = PS5.executeQuery();
+
+            RS5.next();
+
+            int ownerID = Integer.parseInt(RS5.getString("ID"));
+            
             Statement stmt = con.createStatement();
             String s1 = "select max(ID) as ID from questions";
             ResultSet rs = stmt.executeQuery(s1);
@@ -399,7 +411,7 @@ public class databaseClass {
 
             int categoryID = Integer.parseInt(RS.getString("ID"));
 
-            String query2 = "insert into questions values(?,?,?,?)";
+            String query2 = "insert into questions values(?,?,?,?,?)";
 
             PreparedStatement PS2 = con.prepareStatement(query2);
 
@@ -409,7 +421,9 @@ public class databaseClass {
             PS2.setString(2, statement);
             PS2.setInt(3, categoryID);
             PS2.setString(4, dtf.format(now));
-
+            PS2.setInt(5, ownerID);
+            
+            
             PS2.executeUpdate();
 
             con.close();

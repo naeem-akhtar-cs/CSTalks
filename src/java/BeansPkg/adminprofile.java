@@ -13,7 +13,7 @@ import mainPkg.databaseClass;
  *
  * @author naeem
  */
-public class adminprofile implements Serializable{
+    public class adminprofile implements Serializable{
     
     private int ID;
     private String email;
@@ -78,4 +78,5 @@ public class adminprofile implements Serializable{
         return province;
     }
 
+    
 }

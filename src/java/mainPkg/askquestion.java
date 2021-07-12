@@ -29,7 +29,7 @@ public class askquestion extends HttpServlet {
             String category=request.getParameter("categories");
             
             databaseClass DB=new databaseClass();
-            DB.insertQuestion(statement, category);
+            DB.insertQuestion((String)request.getSession().getAttribute("email"), statement, category);
             
             response.sendRedirect("ask-question.jsp"); //Redirecting Back to Ask Question Page
             

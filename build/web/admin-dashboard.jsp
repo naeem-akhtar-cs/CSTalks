@@ -30,7 +30,7 @@
             }
             %>
 
-            <%! websiteStatistics webStats=new websiteStatistics(); %>
+            <jsp:useBean id="webStats" class="BeansPkg.websiteStatistics" scope="page"></jsp:useBean>
             
     <div id="wrapper">
         

@@ -14,61 +14,59 @@ import mainPkg.databaseClass;
  *
  * @author naeem
  */
-public class websiteStatistics implements Serializable{
+public class websiteStatistics implements Serializable {
 
     private int usersVisits;
     private int questionsAsked;
     private int questionsReported;
     private int questionsAnswered;
     private ArrayList<trend> trendingTopics;
-    
+
     private int index;
-    
+
     public websiteStatistics() {
-        
-        index=0;
-        
+
+        index = 0;
+
         databaseClass DB = new databaseClass();
         HashMap webData = DB.getWebsiteStatistics();
 
-        this.usersVisits = (int)webData.get("usersVisits");
-        this.questionsAsked = (int)webData.get("questionsCount");
-        this.questionsReported = (int)webData.get("answersCount");
-        this.questionsAnswered = (int)webData.get("reportedCount");
-        
-        this.trendingTopics=(ArrayList<trend>)webData.get("trendingTopics");
+        this.usersVisits = (int) webData.get("usersVisits");
+        this.questionsAsked = (int) webData.get("questionsCount");
+        this.questionsReported = (int) webData.get("answersCount");
+        this.questionsAnswered = (int) webData.get("reportedCount");
+
+        this.trendingTopics = (ArrayList<trend>) webData.get("trendingTopics");
     }
-    
-    public int getUserVisits(){
+
+    public int getUserVisits() {
         return this.usersVisits;
     }
-    
-    public int getQuestionsAsked(){
+
+    public int getQuestionsAsked() {
         return this.questionsAsked;
     }
-    
-    public int getQuestionsReported(){
+
+    public int getQuestionsReported() {
         return this.questionsReported;
     }
-    
-    public int getQuestionsAnswered(){
+
+    public int getQuestionsAnswered() {
         return this.questionsAnswered;
     }
-    
-    public String gettopic(int index){
-        return trendingTopics.get(index-1).gettopic();
+
+    public String gettopic(int index) {
+        return trendingTopics.get(index - 1).gettopic();
     }
-    
-    public int getpercentage(int index){
-        
-        int count=trendingTopics.get(index-1).getcount();
-        int count2=questionsAsked;
-        int num=(int) (100.0*count/count2);
-    
-        return num;
+
+    public int getpercentage(int index) {
+
+        int count = trendingTopics.get(index - 1).getcount();
+        return (int) (100.0 * count / questionsAsked);
+
     }
-    
-    public void resetindex(){
-        this.index=0;
+
+    public void resetindex() {
+        this.index = 0;
     }
 }
