@@ -184,7 +184,7 @@ public class databaseClass {
             userData.put("lName", RS.getString("lName"));
             userData.put("age", RS.getString("age"));
             userData.put("university", RS.getString("university"));
-            
+
             userData.put("address", RS.getString("useraddress"));
             userData.put("city", RS.getString("city"));
             userData.put("province", RS.getString("province"));
@@ -197,25 +197,24 @@ public class databaseClass {
         return userData;
     }
 
-    public ArrayList<userprofile> getAllUsers(){
-        ArrayList<userprofile> allUsers=new ArrayList<>();
-        
+    public ArrayList<userprofile> getAllUsers() {
+        ArrayList<userprofile> allUsers = new ArrayList<>();
+
         try {
 
             String query = "select ID, email, fName, lName, age, university, useraddress, city, province, date_joined from common_user";
 
             PreparedStatement PS = con.prepareStatement(query);
             ResultSet RS = PS.executeQuery();
-            
-            
-            while(RS.next()){
 
-            allUsers.add(new userprofile(RS.getInt("ID"),RS.getString("email"),
-                    RS.getString("fName"),RS.getString("lName"),RS.getInt("age"),
-                    RS.getString("university"),RS.getString("useraddress"),
-                    RS.getString("city"), RS.getString("province"), RS.getString("date_joined")));
+            while (RS.next()) {
+
+                allUsers.add(new userprofile(RS.getInt("ID"), RS.getString("email"),
+                        RS.getString("fName"), RS.getString("lName"), RS.getInt("age"),
+                        RS.getString("university"), RS.getString("useraddress"),
+                        RS.getString("city"), RS.getString("province"), RS.getString("date_joined")));
             }
-            
+
             this.con.close();
 
         } catch (Exception ex) {
@@ -223,7 +222,7 @@ public class databaseClass {
         }
         return allUsers;
     }
-    
+
     public HashMap<String, String> getAdminData(String email) {
 
         HashMap<String, String> userData = new HashMap<>();
@@ -270,8 +269,6 @@ public class databaseClass {
 
             webData.put("usersVisits", RS.getInt("usersVisits"));
 
-            
-            
             String query1 = "select count(*) as questionsCount from questions";
 
             PreparedStatement PS1 = con.prepareStatement(query1);
@@ -281,8 +278,6 @@ public class databaseClass {
 
             webData.put("questionsCount", RS1.getInt("questionsCount"));
 
-            
-            
             String query2 = "select count(*) as answersCount from answers";
 
             PreparedStatement PS2 = con.prepareStatement(query2);
@@ -292,34 +287,31 @@ public class databaseClass {
 
             webData.put("answersCount", RS2.getInt("answersCount"));
 
-            
-            
             String query3 = "select count(*) as reportedCount from reportedQuestions";
 
-            
             PreparedStatement PS3 = con.prepareStatement(query3);
 
             ResultSet RS3 = PS3.executeQuery();
             RS3.next();
 
             webData.put("reportedCount", RS3.getInt("reportedCount"));
-            
-            String query4="select count(*) as eachCount, title from questions as ques join categories "
+
+            String query4 = "select count(*) as eachCount, title from questions as ques join categories "
                     + "on ques.category=categories.ID group by ques.category, categories.title "
                     + "order by eachCount desc limit 5";
-            
+
             PreparedStatement PS4 = con.prepareStatement(query4);
 
             ResultSet RS4 = PS4.executeQuery();
-            
-            ArrayList<trend> trendingTopics=new ArrayList<>();
-            
-            while(RS4.next()){
+
+            ArrayList<trend> trendingTopics = new ArrayList<>();
+
+            while (RS4.next()) {
                 trendingTopics.add(new trend(RS4.getString(2), RS4.getInt(1)));
             }
-            
+
             webData.put("trendingTopics", trendingTopics);
-            
+
             con.close();
 
         } catch (Exception ex) {
@@ -424,7 +416,7 @@ public class databaseClass {
             RS5.next();
 
             int ownerID = Integer.parseInt(RS5.getString("ID"));
-            
+
             Statement stmt = con.createStatement();
             String s1 = "select max(ID) as ID from questions";
             ResultSet rs = stmt.executeQuery(s1);
@@ -454,8 +446,7 @@ public class databaseClass {
             PS2.setInt(3, categoryID);
             PS2.setString(4, dtf.format(now));
             PS2.setInt(5, ownerID);
-            
-            
+
             PS2.executeUpdate();
 
             con.close();
@@ -632,4 +623,22 @@ public class databaseClass {
         }
         return questionDetail;
     }
+
+    public void deleteQuestion(String statement) {
+
+        try {
+            String query2 = "delete from questions where question_statement=?";
+            
+            PreparedStatement PS2 = con.prepareStatement(query2);
+            PS2.setString(1, statement);
+            
+            PS2.executeUpdate();
+            
+            con.close();
+            
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
 }

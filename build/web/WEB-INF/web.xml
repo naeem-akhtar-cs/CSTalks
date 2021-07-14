@@ -36,6 +36,10 @@
         <servlet-name>questionDetail</servlet-name>
         <servlet-class>mainPkg.questionDetail</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>deleteQuestion</servlet-name>
+        <servlet-class>mainPkg.deleteQuestion</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>signup</servlet-name>
         <url-pattern>/signup</url-pattern>
@@ -67,6 +71,10 @@
     <servlet-mapping>
         <servlet-name>questionDetail</servlet-name>
         <url-pattern>/questionDetail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>deleteQuestion</servlet-name>
+        <url-pattern>/deleteQuestion</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
