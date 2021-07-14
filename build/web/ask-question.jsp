@@ -36,8 +36,6 @@
 
     <jsp:useBean id="category" class="BeansPkg.categoriesHelper" scope="page"></jsp:useBean>
 
-    <jsp:useBean id="categoryVal" class="BeansPkg.categoriesHelper" scope="page"></jsp:useBean>
-
     <% 
         if(session.getAttribute("email")==null){
             response.sendRedirect("login.jsp");
@@ -74,16 +72,11 @@
 
                                                 <% for(int i=0;i<category.getcount();i++){ %>
 
-                                                    <!--Need to change this approach
-                                                    Not Good Practice-->
-
-                                                    <option value=
-                                                    "<jsp:getProperty name="categoryVal" property="title" />"
-                                                    >
-                                                        <jsp:getProperty name="category" property="title" />
+                                                    <option value="<%= category.gettitle(i) %>">
+                                                    <%= category.gettitle(i) %>
                                                     </option>
 
-                                                    <% } category.resetIndex(); categoryVal.resetIndex();%>
+                                                    <% } %>
 
                                             </select>
                                             <br><br>

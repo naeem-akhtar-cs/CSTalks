@@ -150,8 +150,8 @@ insert into answers values(1, 'Inherited functions work slower than normal funct
 insert into answers values(2, 'Often, data members in the base class are left unused which may lead to memory wastage.', 30, '2021/07/11', 5);
 insert into answers values(3, 'Inheritance increases the coupling between base class and derived class. A change in base class will affect all the child classes.', 31, '2021/07/11', 5);
 
-ALTER TABLE answers
-ADD questionID int;
+ALTER TABLE categories
+ADD dateAdded varchar(30);
 
 ALTER TABLE answers
 ADD foreign key (questionID) references questions(ID);
@@ -204,6 +204,14 @@ add age int;
 
 ALTER Table common_user
 add university varchar(50);
+
+update common_user
+set age=21
+where ID=25;
+
+update categories
+set dateAdded='2021/14/07'
+where ID<11;
 
 select* from requestedTopics;
 select* from notes;

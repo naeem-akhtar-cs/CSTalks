@@ -11,16 +11,18 @@ package BeansPkg;
  */
 public class category {
     private String name;
+    private String dateAdded;
     
-    public category(){
-        
-    }
-    
-    public void setname(String category){
-        name=category;
+    public category(String name, String dateAdded){
+        this.name=name;
+        this.dateAdded=dateAdded;
     }
     
     public String getname(){
         return name;
+    }
+    
+   public String getDate(){
+        return this.dateAdded;
     }
 }

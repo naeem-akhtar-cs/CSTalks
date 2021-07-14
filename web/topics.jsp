@@ -13,6 +13,16 @@
 </head>
 
 <body id="page-top">
+
+    <% 
+                if(session.getAttribute("adminEmail")==null){
+                    response.sendRedirect("login.jsp");
+            }
+            %>
+
+            <jsp:useBean id="category" class="BeansPkg.categoriesHelper" scope="page"></jsp:useBean>
+
+
     <div id="wrapper">
         
         <jsp:include page="admin-menu.jsp" />
@@ -39,36 +49,13 @@
                                     </thead>
                                     <tbody>
 
+                                        <% for(int i=0;i<category.getcount();i++){ %>
                                         <tr>
-                                            <td>Database</td>
-                                            <td>2021/05/19</td>
-                                        </tr>
+                                            <td><%= category.gettitle(i) %></td>
+                                            <td><%= category.getDateAdded(i) %></td>
 
-                                        <tr>
-                                            <td>Operating Systems</td>
-                                            <td>2021/05/19</td>
                                         </tr>
-
-                                        <tr>
-                                            <td>OOP</td>
-                                            <td>2021/05/19</td>
-                                        </tr>
-
-                                        <tr>
-                                            <td>General Knowledge</td>
-                                            <td>2021/05/19</td>
-                                        </tr>
-
-                                        <tr>
-                                            <td>Current Affairs</td>
-                                            <td>2021/05/19</td>
-                                        </tr>
-
-                                        <tr>
-                                            <td>Data Structure</td>
-                                            <td>2021/05/19</td>
-                                        </tr>
-
+                                        <% } %>
                                     </tbody>
 
                                 </table>

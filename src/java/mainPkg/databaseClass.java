@@ -1,6 +1,7 @@
 package mainPkg;
 
 import BeansPkg.answer;
+import BeansPkg.category;
 import BeansPkg.questionDetailPage;
 import BeansPkg.trend;
 import BeansPkg.userprofile;
@@ -387,18 +388,18 @@ public class databaseClass {
         return questions;
     }
 
-    public ArrayList<String> getCategories() {
-        ArrayList<String> list = new ArrayList<>();
+    public ArrayList<category> getCategories() {
+        ArrayList<category> list = new ArrayList<>();
 
         try {
-            String query = "select title from categories";
+            String query = "select title, dateAdded from categories";
 
             PreparedStatement PS = con.prepareStatement(query);
 
             ResultSet RS = PS.executeQuery();
 
             while (RS.next()) {
-                list.add(RS.getString("title"));
+                list.add(new category(RS.getString("title"), RS.getString("dateAdded")));
             }
             con.close();
         } catch (Exception ex) {
