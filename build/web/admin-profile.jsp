@@ -67,7 +67,7 @@
                                                                         Address</strong></label><input
                                                                     class="form-control" type="email" id="email"
                                                                     value=<jsp:getProperty name="user"
-                                                                    property="email" /> name="email"></div>
+                                                                    property="email" /> name="email" readonly></div>
                                                         </div>
                                                     </div>
                                                     <div class="form-row">

@@ -73,6 +73,16 @@
                                                         <div class="form-group"><label for="last_name"><strong>Last Name</strong></label><input class="form-control" type="text" id="last_name" value=<jsp:getProperty name="user" property="lName"/> name="last_name"></div>
                                                     </div>
                                                 </div>
+
+                                                <div class="form-row">
+                                                    <div class="col">
+                                                        <div class="form-group"><label><strong>Age</strong></label><input class="form-control" type="text" id="age" value=<jsp:getProperty name="user" property="age"/> name="age"></div>
+                                                    </div>
+                                                    <div class="col">
+                                                        <div class="form-group"><label><strong>University</strong></label><input class="form-control" type="text" id="university" value="<jsp:getProperty name="user" property="university"/>" name="university"></div>
+                                                    </div>
+                                                </div>
+
                                                 <div class="form-group"><button class="btn btn-primary btn-sm" type="submit">Save Settings</button></div>
                                             </form>
                                         </div>

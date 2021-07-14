@@ -3,6 +3,7 @@ package mainPkg;
 import BeansPkg.answer;
 import BeansPkg.questionDetailPage;
 import BeansPkg.trend;
+import BeansPkg.userprofile;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -167,7 +168,7 @@ public class databaseClass {
 
         try {
 
-            String query = "select ID, email, fName, lName, useraddress, city, province from common_user where email=?";
+            String query = "select ID, email, fName, lName, age, university, useraddress, city, province from common_user where email=?";
 
             PreparedStatement PS = con.prepareStatement(query);
 
@@ -180,6 +181,9 @@ public class databaseClass {
             userData.put("email", RS.getString("email"));
             userData.put("fName", RS.getString("fName"));
             userData.put("lName", RS.getString("lName"));
+            userData.put("age", RS.getString("age"));
+            userData.put("university", RS.getString("university"));
+            
             userData.put("address", RS.getString("useraddress"));
             userData.put("city", RS.getString("city"));
             userData.put("province", RS.getString("province"));
@@ -192,6 +196,33 @@ public class databaseClass {
         return userData;
     }
 
+    public ArrayList<userprofile> getAllUsers(){
+        ArrayList<userprofile> allUsers=new ArrayList<>();
+        
+        try {
+
+            String query = "select ID, email, fName, lName, age, university, useraddress, city, province, date_joined from common_user";
+
+            PreparedStatement PS = con.prepareStatement(query);
+            ResultSet RS = PS.executeQuery();
+            
+            
+            while(RS.next()){
+
+            allUsers.add(new userprofile(RS.getInt("ID"),RS.getString("email"),
+                    RS.getString("fName"),RS.getString("lName"),RS.getInt("age"),
+                    RS.getString("university"),RS.getString("useraddress"),
+                    RS.getString("city"), RS.getString("province"), RS.getString("date_joined")));
+            }
+            
+            this.con.close();
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return allUsers;
+    }
+    
     public HashMap<String, String> getAdminData(String email) {
 
         HashMap<String, String> userData = new HashMap<>();

@@ -173,6 +173,10 @@ ID int primary key
 
 insert admin_user values (1,'admin@cstalks.com', 'Amjad', 'Sabri', 'amjad78sabri', 'Gulshan Iqbal', 'Karachi', 'Sindh');
 
+update admin_user
+set user_password='123'
+where ID=1;
+
 create table reportedQuestions(
 questionID int
 ,dateReported varchar(20)
@@ -191,7 +195,15 @@ userID int
 
 -- drop table  userLogins
 
-select count(*) as count, title from questions as ques join categories on ques.category=categories.ID group by ques.category, categories.title;
+select count(*) as count, title from questions as ques join categories on ques.category=categories.ID group by ques.category, categories.title order by count desc limit 5;
+
+select count(*) as eachCount, title from questions as ques join categories on ques.category=categories.ID group by ques.category, categories.title order by eachCount desc limit 5;
+
+ALTER Table common_user
+add age int;
+
+ALTER Table common_user
+add university varchar(50);
 
 select* from requestedTopics;
 select* from notes;
@@ -204,4 +216,3 @@ select* from answers;
 select* from admin_user;
 select* from reportedQuestions;
 select* from userLogins;
-

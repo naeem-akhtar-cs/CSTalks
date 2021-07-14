@@ -13,6 +13,17 @@
 </head>
 
 <body id="page-top">
+
+
+            <% 
+                if(session.getAttribute("adminEmail")==null){
+                    response.sendRedirect("login.jsp");
+            }
+            %>
+
+            <jsp:useBean id="obj" class="BeansPkg.allUsers" scope="page"></jsp:useBean>
+
+            
     <div id="wrapper">
         
         <jsp:include page="admin-menu.jsp" />
@@ -23,7 +34,7 @@
                 <jsp:include page="admin-navigation.jsp"/>
                 
                 <div class="container-fluid">
-                    <h3 class="text-dark mb-4">Users Info (Click to See More Details)</h3>
+                    <h3 class="text-dark mb-4">Users Info</h3>
                     <div class="card shadow">
 
                         <div class="card-body">
@@ -39,85 +50,41 @@
                                 <table class="table my-0" id="dataTable">
                                     <thead>
                                         <tr>
+                                            <th id="userID">ID</th>
+                                            <th id="userID">Email</th>
                                             <th id="name">Name</th>
-                                            <th id="dob">DOB</th>
-                                            <th id="level">Level</th>
+                                            <th id="dob">Age</th>
                                             <th id="city">City</th>
-                                            <th id="age">Age</th>
                                             <th id="joined">Join Date</th>
                                             <th id="university">University</th>
                                             <th id="action">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td><a href="#">Naeem Akhtar</td>
-                                            <td>Sep 20, 1999</td>
-                                            <td>level 0</td>
-                                            <td>Lahore</td>
-                                            <td>21</td>
-                                            <td>2021/11/28</td>
-                                            <td>FAST-NU Lahore</td>
-                                            <td>
-                                                <div class="mb-3"><button class="btn btn-primary btn-sm" type="button">Remove</button></div>
-                                            </td>
-                                        </tr>
 
-                                        <tr>
-                                            <td><a href="#">Sameen Akram</a></td>
-                                            <td>Sep 20, 1999</td>
-                                            <td>Level 1</td>
-                                            <td>Lahore</td>
-                                            <td>21</td>
-                                            <td>2020/03/13</td>
-                                            <td>FAST-NU Lahore</td>
-                                            <td>
-                                                <div class="mb-3"><button class="btn btn-primary btn-sm" type="button">Remove</button></div>
-                                            </td>
-                                        </tr>
+                                        <% for(int i=0;i<obj.getSize();i++){ %>
 
+                                        
                                         <tr>
-                                            <td><a href="#">Samran Waheed</a></td>
-                                            <td>Sep 20, 1999</td>
-                                            <td>Level 2</td>
-                                            <td>Lahore</td>
-                                            <td>21</td>
-                                            <td>2018/08/12</td>
-                                            <td>FAST-NU Lahore</td>
+                                            <td><%= obj.getID(i) %></td>
+                                            <td><%= obj.getemail(i) %></td>
+                                            <td><%= obj.getfullName(i) %></td>
+                                            <td><%= obj.getage(i) %></td>
+                                            <td><%= obj.getcity(i) %></td>
+                                            <td><%= obj.getDateJoined(i) %></td>
+                                            <td><%= obj.getuniversity(i) %></td>
                                             <td>
                                                 <div class="mb-3"><button class="btn btn-primary btn-sm" type="button">Remove</button></div>
                                             </td>
                                         </tr>
+                                    
+                                   <% }%>
 
-                                        <tr>
-                                            <td><a href="#">Ahmad Waheed</a></td>
-                                            <td>Sep 20, 1999</td>
-                                            <td>Level 3</td>
-                                            <td>Lahore</td>
-                                            <td>21</td>
-                                            <td>2018/05/14</td>
-                                            <td>FAST-NU Lahore</td>
-                                            <td>
-                                                <div class="mb-3"><button class="btn btn-primary btn-sm" type="button">Remove</button></div>
-                                            </td>
-                                        </tr>
+
                                     </tbody>
                                 </table>
                             </div>
-                            <div class="row">
-                                <div class="col-md-6 align-self-center">
-                                    <p id="dataTable_info" class="dataTables_info" role="status" aria-live="polite">Showing 1 to 4 of 13</p>
-                                </div>
-                                <div class="col-md-6">
-                                    <nav class="d-lg-flex justify-content-lg-end dataTables_paginate paging_simple_numbers">
-                                        <ul class="pagination">
-                                            <li class="page-item disabled"><a class="page-link" href="#" aria-label="Previous"><span aria-hidden="true">«</span></a></li>
-                                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                                            <li class="page-item"><a class="page-link" href="#" aria-label="Next"><span aria-hidden="true">»</span></a></li>
-                                        </ul>
-                                    </nav>
-                                </div>
-                            </div>
+                            
                         </div>
                     </div>
                 </div>

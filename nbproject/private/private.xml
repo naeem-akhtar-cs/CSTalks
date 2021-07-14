@@ -4,8 +4,14 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/naeem/OneDrive/Documents/NetBeansProjects/CSTalks/src/java/mainPkg/login.java</file>
-            <file>file:/C:/Users/naeem/OneDrive/Documents/NetBeansProjects/CSTalks/web/question-detail.jsp</file>
-            <file>file:/C:/Users/naeem/OneDrive/Documents/NetBeansProjects/CSTalks/src/java/mainPkg/signup.java</file>
+            <file>file:/C:/Users/naeem/OneDrive/Documents/NetBeansProjects/CSTalks/src/java/mainPkg/databaseClass.java</file>
+            <file>file:/C:/Users/naeem/OneDrive/Documents/NetBeansProjects/CSTalks/src/java/BeansPkg/userprofile.java</file>
+            <file>file:/C:/Users/naeem/OneDrive/Documents/NetBeansProjects/CSTalks/src/java/BeansPkg/question.java</file>
+            <file>file:/C:/Users/naeem/OneDrive/Documents/NetBeansProjects/CSTalks/src/java/BeansPkg/websiteStatistics.java</file>
+            <file>file:/C:/Users/naeem/OneDrive/Documents/NetBeansProjects/CSTalks/web/admin-profile.jsp</file>
+            <file>file:/C:/Users/naeem/OneDrive/Documents/NetBeansProjects/CSTalks/src/java/mainPkg/askquestion.java</file>
+            <file>file:/C:/Users/naeem/OneDrive/Documents/NetBeansProjects/CSTalks/src/java/BeansPkg/adminprofile.java</file>
+            <file>file:/C:/Users/naeem/OneDrive/Documents/NetBeansProjects/CSTalks/src/java/BeansPkg/trend.java</file>
         </group>
     </open-files>
 </project-private>
