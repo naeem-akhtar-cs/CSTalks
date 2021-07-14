@@ -97,6 +97,40 @@ public class databaseClass {
         return check;
     }
 
+    //Topic means Category
+    public void addTopic(String topic) {
+
+        try {
+            String s1 = "select max(ID) as ID from categories";
+
+            PreparedStatement PS = con.prepareStatement(s1);
+            
+            ResultSet rs = PS.executeQuery(s1);
+            rs.next();
+            int categoryID = Integer.parseInt(rs.getString("ID")); //Getting Max Existing ID of Category
+
+            String query = "insert into categories values(?,?,?)";
+            
+            PreparedStatement PS1 = con.prepareStatement(query);
+
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+            LocalDateTime now = LocalDateTime.now();
+            
+            categoryID++;
+            
+            PS1.setInt(1, categoryID);
+            PS1.setString(2, topic);
+            PS1.setString(3, dtf.format(now));
+            
+            PS1.executeUpdate();
+            
+        } catch (Exception ex){
+            ex.printStackTrace();
+        } 
+        }
+    
+    
+
     public int DBSignin(String useremail, String password) {
 
         int check = 0;
@@ -210,7 +244,7 @@ public class databaseClass {
             while (RS.next()) {
 
                 allUsers.add(new userprofile(RS.getInt("ID"), RS.getString("email"),
-                        RS.getString("fName"), RS.getString("lName"), RS.getInt("age"),
+                        RS.getString("fName"), RS.getString("lName"), RS.getString("age"),
                         RS.getString("university"), RS.getString("useraddress"),
                         RS.getString("city"), RS.getString("province"), RS.getString("date_joined")));
             }
@@ -628,14 +662,14 @@ public class databaseClass {
 
         try {
             String query2 = "delete from questions where question_statement=?";
-            
+
             PreparedStatement PS2 = con.prepareStatement(query2);
             PS2.setString(1, statement);
-            
+
             PS2.executeUpdate();
-            
+
             con.close();
-            
+
         } catch (Exception ex) {
             ex.printStackTrace();
         }

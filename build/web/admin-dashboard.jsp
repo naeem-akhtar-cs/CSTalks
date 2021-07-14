@@ -113,7 +113,7 @@
                                     <h6 class="text-primary font-weight-bold m-0">Trending Topics</h6>
                                 </div>
                                 <div class="card-body">
-                                    <h4 class="small font-weight-bold"><%= webStats.gettopic(1) %><span class="float-right"><%= webStats.getpercentage(1) %> %</span></h4>
+                                    <h4 class="small font-weight-bold"><%= webStats.gettopic(1) %><span class="float-right"><%= webStats.getpercentage(1) %>%</span></h4>
                                     <div class="progress mb-4">
                                         <div class="progress-bar bg-danger" aria-valuenow="<%= webStats.getpercentage(1) %>" aria-valuemin="0" aria-valuemax="100" style="width: <%= webStats.getpercentage(1) %>%;"><span class="sr-only"><%= webStats.getpercentage(1) %>%</span></div>
                                     </div>

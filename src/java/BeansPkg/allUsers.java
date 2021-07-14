@@ -37,7 +37,7 @@ public class allUsers {
         return allUsers.get(index).getfullName();
     }
     
-    public int getage(int index){
+    public String getage(int index){
         return allUsers.get(index).getage();
     }
     

@@ -30,6 +30,15 @@
 </head>
 
 <body id="page-top">
+
+    <% 
+                if(session.getAttribute("adminEmail")==null){
+                    response.sendRedirect("login.jsp");
+            }
+            %>
+
+
+
     <div id="wrapper">
 
         
@@ -52,10 +61,14 @@
                     <div class="card shadow">
 
                         <div class="card-body">
+                            <form method="POST" action="http://localhost:8080/CSTalks/addTopic">
                             <div class="form-group">
                                 <input class="form-control form-control-user" type="text" id="topic" aria-describedby="emailHelp" placeholder="Concise Title" name="statement">
                             </div>
-                            <button class="btn btn-primary text-white btn-user" type="submit" style="float:right">Add</button>
+                            <input class="btn btn-primary text-white btn-user" type="submit" style="float:right" value="Add"/>
+                        
+                        </form>
+
                         </div>
                     </div>
                 </div>

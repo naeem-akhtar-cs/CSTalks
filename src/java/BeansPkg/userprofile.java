@@ -19,7 +19,7 @@ public class userprofile implements Serializable{
     String address;
     String city;
     String province;
-    int age;
+    String age;
     String university;
     String dateJoined;
     
@@ -28,7 +28,7 @@ public class userprofile implements Serializable{
     }
     
     public userprofile(int ID, String email, String fName, String lName, 
-            int age, String university, String address, String city, String province, String dateJoined){
+            String age, String university, String address, String city, String province, String dateJoined){
         this.ID=ID;
         this.email=email;
         this.fName=fName;
@@ -52,7 +52,8 @@ public class userprofile implements Serializable{
      this.email=userData.get("email");
      this.fName=userData.get("fName");
      this.lName=userData.get("lName");
-     this.age=Integer.parseInt(userData.get("age"));
+     
+     this.age=userData.get("age");
      this.university=userData.get("university");
      
      this.address=userData.get("address");
@@ -80,7 +81,7 @@ public class userprofile implements Serializable{
         return fName+" "+lName;
     }
     
-    public int getage(){
+    public String getage(){
         return age;
     }
     
