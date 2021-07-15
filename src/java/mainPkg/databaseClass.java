@@ -137,7 +137,7 @@ public class databaseClass {
         try {
             Statement stmt = con.createStatement();
 
-            String s1 = "select user_password, ID from common_user where email='" + useremail + "' and userStatus=1";
+            String s1 = "select user_password, ID from common_user where email='" + useremail + "' and user_status=1";
 
             ResultSet rs = stmt.executeQuery(s1);
 
@@ -718,7 +718,7 @@ public class databaseClass {
     
     public void susupendUser(int ID){
         try {
-            String query="update common_user set userStatus=0 where ID="+ID;
+            String query="update common_user set user_status=0 where ID="+ID;
             PreparedStatement PS=con.prepareStatement(query);
             PS.executeUpdate();
             
@@ -751,69 +751,48 @@ public class databaseClass {
             
             //Entries from other tables will be deleted via on delete cascade
             
-            
-            /*
-            //Delete from notes table
-            String query1="delete from notes where owner_id="+ID;
-            PreparedStatement PS1=con.prepareStatement(query1);
-            
-            PS1.executeUpdate();
-            
-            //Delete from requestedTopics table
-            String query2="delete from requestedTopics where requestedBy="+ID;
-            PreparedStatement PS2=con.prepareStatement(query2);
-            
-            PS2.executeUpdate();
-            
-            
-            //Delete from requestedTopics table
-            String query3="delete from requestedTopics where requestedBy="+ID;
-            PreparedStatement PS3=con.prepareStatement(query3);
-            
-            PS3.executeUpdate();
-            
-            
-            //Delete from questions table
-            String query4="delete from questions where askedBy="+ID;
-            PreparedStatement PS4=con.prepareStatement(query4);
-            
-            PS4.executeUpdate();
-            
-            
-            //Delete from requestedTopics table
-            String query5="delete from requestedTopics where requestedBy="+ID;
-            PreparedStatement PS5=con.prepareStatement(query5);
-            
-            PS5.executeUpdate();
-            
-            
-            //Delete from bookMarks table
-            String query6="delete from bookMarks where owner_id="+ID;
-            PreparedStatement PS6=con.prepareStatement(query6);
-            
-            PS6.executeUpdate();
-            
-            
-            //Delete from answers table
-            String query7="delete from answers where ownerID="+ID;
-            PreparedStatement PS7=con.prepareStatement(query7);
-            
-            PS7.executeUpdate();
-            
-            
-            //Delete from reportedQuestions table
-            String query8="delete from reportedQuestions where reportedBy="+ID;
-            PreparedStatement PS8=con.prepareStatement(query8);
-            
-            PS8.executeUpdate();
-            
-            */
-            
-            
             con.close();
             
         } catch (Exception ex) {
             ex.printStackTrace();
         }
     }
+    
+    public void updateUserSetting(String email, String fName, String lName, String age, String university){
+        try {
+            String query="update common_user set fName=?, lName=?, age=?, university=? where email=?";
+            PreparedStatement PS=con.prepareStatement(query);
+            
+            PS.setString(1, fName);
+            PS.setString(2, lName);
+            PS.setInt(3, Integer.parseInt(age));
+            PS.setString(4, university);
+            PS.setString(5, email);
+            
+            PS.executeUpdate();
+            
+            con.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(databaseClass.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void updateUserAddress(String email, String address, String city, String province){
+        try {
+            String query="update common_user set useraddress=?, city=?, province=? where email=?";
+            PreparedStatement PS=con.prepareStatement(query);
+            
+            PS.setString(1, address);
+            PS.setString(2, city);
+            PS.setString(3, province);
+            PS.setString(4, email);
+            
+            PS.executeUpdate();
+            
+            con.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(databaseClass.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
 }

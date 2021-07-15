@@ -60,6 +60,18 @@
         <servlet-name>deleteAccount</servlet-name>
         <servlet-class>mainPkg.deleteAccount</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>pdateUserSetting</servlet-name>
+        <servlet-class>mainPkg.pdateUserSetting</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>updateUserSetting</servlet-name>
+        <servlet-class>mainPkg.updateUserSetting</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>updateUserAddress</servlet-name>
+        <servlet-class>mainPkg.updateUserAddress</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>signup</servlet-name>
         <url-pattern>/signup</url-pattern>
@@ -115,6 +127,18 @@
     <servlet-mapping>
         <servlet-name>deleteAccount</servlet-name>
         <url-pattern>/deleteAccount</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>pdateUserSetting</servlet-name>
+        <url-pattern>/pdateUserSetting</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>updateUserSetting</servlet-name>
+        <url-pattern>/updateUserSetting</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>updateUserAddress</servlet-name>
+        <url-pattern>/updateUserAddress</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

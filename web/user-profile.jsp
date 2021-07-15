@@ -54,7 +54,7 @@
                                             <p class="text-primary m-0 font-weight-bold">User Settings</p>
                                         </div>
                                         <div class="card-body">
-                                            <form>
+                                            
                                                 <div class="form-row">
                                                     <div class="col">
                                                         <div class="form-group"><label for="username"><strong>User ID</strong></label><input class="form-control" type="text" id="username" 
@@ -62,24 +62,25 @@
                                                             name="username" readonly></div>
                                                     </div>
                                                     <div class="col">
-                                                        <div class="form-group"><label for="email"><strong>Email Address</strong></label><input class="form-control" type="email" id="email" value=<jsp:getProperty name="user" property="email"/> name="email"></div>
+                                                        <div class="form-group"><label for="email"><strong>Email Address</strong></label><input class="form-control" type="email" id="email" value=<jsp:getProperty name="user" property="email"/> name="email" readonly></div>
                                                     </div>
                                                 </div>
+                                                <form method="POST" action="http://localhost:8080/CSTalks/updateUserSetting">
                                                 <div class="form-row">
                                                     <div class="col">
-                                                        <div class="form-group"><label for="first_name"><strong>First Name</strong></label><input class="form-control" type="text" id="first_name" value=<jsp:getProperty name="user" property="fName"/> name="first_name"></div>
+                                                        <div class="form-group"><label for="first_name"><strong>First Name</strong></label><input class="form-control" type="text" name="first_name" value=<jsp:getProperty name="user" property="fName"/> name="first_name"></div>
                                                     </div>
                                                     <div class="col">
-                                                        <div class="form-group"><label for="last_name"><strong>Last Name</strong></label><input class="form-control" type="text" id="last_name" value=<jsp:getProperty name="user" property="lName"/> name="last_name"></div>
+                                                        <div class="form-group"><label for="last_name"><strong>Last Name</strong></label><input class="form-control" type="text" name="last_name" value=<jsp:getProperty name="user" property="lName"/> name="last_name"></div>
                                                     </div>
                                                 </div>
 
                                                 <div class="form-row">
                                                     <div class="col">
-                                                        <div class="form-group"><label><strong>Age</strong></label><input class="form-control" type="text" id="age" value=<jsp:getProperty name="user" property="age"/> name="age"></div>
+                                                        <div class="form-group"><label><strong>Age</strong></label><input class="form-control" type="text" name="age" value=<jsp:getProperty name="user" property="age"/> name="age"></div>
                                                     </div>
                                                     <div class="col">
-                                                        <div class="form-group"><label><strong>University</strong></label><input class="form-control" type="text" id="university" value="<jsp:getProperty name="user" property="university"/>" name="university"></div>
+                                                        <div class="form-group"><label><strong>University</strong></label><input class="form-control" type="text" name="university" value="<jsp:getProperty name="user" property="university"/>" name="university"></div>
                                                     </div>
                                                 </div>
 
@@ -92,14 +93,14 @@
                                             <p class="text-primary m-0 font-weight-bold">Contact Settings</p>
                                         </div>
                                         <div class="card-body">
-                                            <form>
+                                            <form method="POST" action="http://localhost:8080/CSTalks/updateUserAddress">
                                                 <div class="form-group"><label for="address"><strong>Address</strong></label><input class="form-control" type="text" id="address" value="<jsp:getProperty name="user" property="address"/>" name="address"></div>
                                                 <div class="form-row">
                                                     <div class="col">
                                                         <div class="form-group"><label for="city"><strong>City</strong></label><input class="form-control" type="text" id="city" value=<jsp:getProperty name="user" property="city"/> name="city"></div>
                                                     </div>
                                                     <div class="col">
-                                                        <div class="form-group"><label for="Province"><strong>Province</strong></label><input class="form-control" type="text" id="province" value=<jsp:getProperty name="user" property="province"/> name="country"></div>
+                                                        <div class="form-group"><label for="Province"><strong>Province</strong></label><input class="form-control" type="text" id="province" value=<jsp:getProperty name="user" property="province"/> name="province"></div>
                                                     </div>
                                                 </div>
                                                 <div class="form-group"><button class="btn btn-primary btn-sm" type="submit">Save&nbsp;Settings</button></div>
