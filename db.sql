@@ -200,8 +200,8 @@ select count(*) as count, title from questions as ques join categories on ques.c
 
 select count(*) as eachCount, title from questions as ques join categories on ques.category=categories.ID group by ques.category, categories.title order by eachCount desc limit 5;
 
-ALTER Table common_user
-add age int;
+ALTER Table notes
+add ID int;
 
 ALTER Table common_user
 add university varchar(50);
@@ -215,10 +215,10 @@ set dateAdded='2021/14/07'
 where ID<11;
 
 
-SHOW CREATE table userLogins;
+SHOW CREATE table common_user;
 
-ALTER TABLE userLogins
-DROP CONSTRAINT userLogins_ibfk_1;
+ALTER TABLE common_user
+DROP COLUMN userStatus;
 
 ALTER TABLE userLogins
 ADD foreign key userLogins(userID) references common_user(ID) on delete set null;
@@ -231,6 +231,15 @@ update common_user
 set userStatus=1
 where ID=25;
 
+
+update notes
+set ID=3
+where note='My Note';
+
+delete from notes where owner_id=25;
+
+ALTER table notes add primary key (ID);
+
 select* from requestedTopics;
 select* from notes;
 select* from common_user;
@@ -242,4 +251,3 @@ select* from answers;
 select* from admin_user;
 select* from reportedQuestions;
 select* from userLogins;
-

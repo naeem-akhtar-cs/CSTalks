@@ -14,47 +14,32 @@ import mainPkg.databaseClass;
  * @author naeem
  */
 public class notesHelper {
+
     private ArrayList<note> notesList;
-    private int index;
-    
-    public notesHelper(){
-        this.index=0;
-        this.notesList=new ArrayList<>();
+
+    public notesHelper() {
+
     }
-    
-    public void getData(String email){
-        
-        databaseClass DB=new databaseClass();
-        
-        ArrayList<HashMap<String, String>> list=DB.getNotes(email);
-        
-        for(int i=0;i<list.size();i++){
-            HashMap<String, String> note=list.get(i);
-            
-            note myNote=new note();
-            
-            myNote.setnote(note.get("note"));
-            myNote.setdate(note.get("date"));
-            
-            notesList.add(myNote);
-        }
+
+    public void getData(String email) {
+        databaseClass DB = new databaseClass();
+        this.notesList = DB.getNotes(email);
     }
-    
-    public String getnote(){
+
+    public int getID(int index) {
+        return notesList.get(index).getID();
+    }
+
+    public String getnote(int index) {
         return notesList.get(index).getnote();
     }
-    
-    public String getdate(){
-         //This Approach of Tracking List is not Good
-        return notesList.get(index++).getdate();
+
+    public String getdate(int index) {
+        return notesList.get(index).getdate();
     }
-    
-    
-    public int getcount(){
+
+    public int getSize() {
         return notesList.size();
     }
-    
-    public void resetIndex(){
-        index=0;
-    }
+
 }

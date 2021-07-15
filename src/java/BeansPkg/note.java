@@ -10,20 +10,19 @@ package BeansPkg;
  * @author naeem
  */
 public class note {
+    int ID;
     String note;
     String dateAdded;
     
-    public note(){
-        
-    }
-    
-    public void setnote(String note){
+    public note(int ID, String note, String date){
+        this.ID=ID;
         this.note=note;
-    }
-    
-    public void setdate(String date){
         this.dateAdded=date;
     }
+    
+    public int getID(){
+        return this.ID;
+    } 
     
     public String getnote(){
         return this.note;

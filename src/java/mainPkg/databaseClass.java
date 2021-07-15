@@ -2,6 +2,7 @@ package mainPkg;
 
 import BeansPkg.answer;
 import BeansPkg.category;
+import BeansPkg.note;
 import BeansPkg.questionDetailPage;
 import BeansPkg.requestedTopic;
 import BeansPkg.trend;
@@ -507,13 +508,27 @@ public class databaseClass {
 
             int ownerID = Integer.parseInt(RS.getString("ID"));
 
-            String query1 = "insert into notes values(?,?,?)";
+
+            String query2 = "select max(ID) as ID from notes";
+
+            PreparedStatement PS2 = con.prepareStatement(query2);
+
+            ResultSet RS2 = PS2.executeQuery();
+
+            RS2.next();
+
+            int maxNoteID = Integer.parseInt(RS2.getString("ID"));
+            
+            maxNoteID++;
+            
+            String query1 = "insert into notes (ID, owner_id, note, date_added) values(?, ?, ?, ?)";
 
             PreparedStatement PS1 = con.prepareStatement(query1);
 
-            PS1.setInt(1, ownerID);
-            PS1.setString(2, note);
-            PS1.setString(3, dtf.format(now));
+            PS1.setInt(1, maxNoteID);
+            PS1.setInt(2, ownerID);
+            PS1.setString(3, note);
+            PS1.setString(4, dtf.format(now));
 
             PS1.executeUpdate();
 
@@ -525,12 +540,13 @@ public class databaseClass {
 
     }
 
-    public ArrayList<HashMap<String, String>> getNotes(String email) {
+    public ArrayList<note> getNotes(String email) {
 
-        ArrayList<HashMap<String, String>> notes = new ArrayList<>();
+        ArrayList<note> notesList = new ArrayList<>();
 
         try {
-            String query = "select note, date_added from notes join common_user on notes.owner_id=common_user.ID where common_user.email=?";
+            String query = "select notes.ID, note, date_added from notes join common_user "
+                    + "on notes.owner_id=common_user.ID where common_user.email=?";
 
             PreparedStatement PS = con.prepareStatement(query);
 
@@ -539,21 +555,32 @@ public class databaseClass {
             ResultSet RS = PS.executeQuery();
 
             while (RS.next()) {
-                HashMap<String, String> myNote = new HashMap<>();
-
-                myNote.put("note", RS.getString("note"));
-                myNote.put("date", RS.getString("date_added"));
-
-                notes.add(myNote);
+                notesList.add(new note(RS.getInt("ID"),RS.getString("note"), RS.getString("date_added")));
             }
+            
             this.con.close();
 
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
-        return notes;
+        return notesList;
     }
 
+    public void deleteNote(int ID){
+        try{
+            
+            String query="delete from notes where ID="+ID;
+            PreparedStatement PS=con.prepareStatement(query);
+            
+            PS.executeUpdate();
+            
+            con.close();
+        }
+        catch(Exception ex){
+            ex.printStackTrace();
+        }
+    }
+    
     public ArrayList<requestedTopic> getRequestedTopics() {
 
         ArrayList<requestedTopic> requestedTopicsList = new ArrayList<>();

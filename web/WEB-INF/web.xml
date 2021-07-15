@@ -72,6 +72,10 @@
         <servlet-name>updateUserAddress</servlet-name>
         <servlet-class>mainPkg.updateUserAddress</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>deleteNote</servlet-name>
+        <servlet-class>mainPkg.deleteNote</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>signup</servlet-name>
         <url-pattern>/signup</url-pattern>
@@ -139,6 +143,10 @@
     <servlet-mapping>
         <servlet-name>updateUserAddress</servlet-name>
         <url-pattern>/updateUserAddress</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>deleteNote</servlet-name>
+        <url-pattern>/deleteNote</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

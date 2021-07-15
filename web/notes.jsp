@@ -50,18 +50,22 @@
                                     </thead>
                                     <tbody>
 
-                                        <% for(int i=0;i<notes.getcount();i++){ %>
-
-                                        <tr>
-                                            <td><jsp:getProperty name="notes" property="note"/></td>
-                                            <td><jsp:getProperty name="notes" property="date"/></td>
-                                            <td>
-                                                <div class="mb-3"><button class="btn btn-primary btn-sm" type="button">Delete</button></div>
-                                            </td>
-                                        </tr>
-
                                         
-                                        <% } notes.resetIndex();  %>
+                                        <% for(int i=0;i<notes.getSize();i++){ %>
+
+                                            <form method="POST" action="http://localhost:8080/CSTalks/deleteNote">
+                                            <input type="hidden" name="ID" value=<%= notes.getID(i) %> >
+                                        
+                                            <tr>
+                                            <td><%= notes.getnote(i) %></td>
+                                            <td><%= notes.getdate(i) %></td>
+                                            <td>
+                                                <div class="mb-3"><button class="btn btn-primary btn-sm" type="submit">Delete</button></div>
+                                            </td>
+                                            </tr>
+
+                                            </form>
+                                        <% } %>
 
                                     </tbody>
 
