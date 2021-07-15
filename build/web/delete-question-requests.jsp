@@ -13,6 +13,14 @@
 </head>
 
 <body id="page-top">
+
+    <% 
+                if(session.getAttribute("adminEmail")==null){
+                    response.sendRedirect("login.jsp");
+            }
+            %>
+
+            
     <div id="wrapper">
         
         <jsp:include page="admin-menu.jsp" />

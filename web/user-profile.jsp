@@ -112,10 +112,11 @@
                                             <p class="text-primary m-0 font-weight-bold" style="color:red">Delete Account</p>
                                         </div>
                                         <div class="card-body">
-
                                             <div style="color:Red">Once You Delete Your Account All of Your Data as well as Activity Log Will be Lost and You Wouldn't be able to Restore Any of Your Information</div>
                                             </br>
+                                            <form method="POST" action="http://localhost:8080/CSTalks/deleteAccount">
                                             <div class="form-group"><button class="btn btn-primary btn-sm" style="background-color:red; border:black" type="submit">Delete&nbsp;Account</button></div>
+                                            </form>
                                         </div>
                                     </div>
 

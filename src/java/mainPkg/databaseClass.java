@@ -3,6 +3,7 @@ package mainPkg;
 import BeansPkg.answer;
 import BeansPkg.category;
 import BeansPkg.questionDetailPage;
+import BeansPkg.requestedTopic;
 import BeansPkg.trend;
 import BeansPkg.userprofile;
 import java.sql.Connection;
@@ -104,32 +105,30 @@ public class databaseClass {
             String s1 = "select max(ID) as ID from categories";
 
             PreparedStatement PS = con.prepareStatement(s1);
-            
+
             ResultSet rs = PS.executeQuery(s1);
             rs.next();
             int categoryID = Integer.parseInt(rs.getString("ID")); //Getting Max Existing ID of Category
 
             String query = "insert into categories values(?,?,?)";
-            
+
             PreparedStatement PS1 = con.prepareStatement(query);
 
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
             LocalDateTime now = LocalDateTime.now();
-            
+
             categoryID++;
-            
+
             PS1.setInt(1, categoryID);
             PS1.setString(2, topic);
             PS1.setString(3, dtf.format(now));
-            
+
             PS1.executeUpdate();
-            
-        } catch (Exception ex){
+
+        } catch (Exception ex) {
             ex.printStackTrace();
-        } 
         }
-    
-    
+    }
 
     public int DBSignin(String useremail, String password) {
 
@@ -138,7 +137,7 @@ public class databaseClass {
         try {
             Statement stmt = con.createStatement();
 
-            String s1 = "select user_password, ID from common_user where email='" + useremail + "'";
+            String s1 = "select user_password, ID from common_user where email='" + useremail + "' and userStatus=1";
 
             ResultSet rs = stmt.executeQuery(s1);
 
@@ -555,6 +554,32 @@ public class databaseClass {
         return notes;
     }
 
+    public ArrayList<requestedTopic> getRequestedTopics() {
+
+        ArrayList<requestedTopic> requestedTopicsList = new ArrayList<>();
+        
+        try {
+            String query = "select title, dateRequested, fName, lName from requestedTopics left join common_user "
+                    + "on requestedTopics.requestedBy=common_user.ID";
+
+            PreparedStatement PS = con.prepareStatement(query);
+
+            ResultSet RS = PS.executeQuery();
+
+            while (RS.next()) {
+
+                requestedTopicsList.add(new requestedTopic(RS.getString("title"), 
+                        RS.getString("dateRequested"),RS.getString("fName") + " " 
+                                + RS.getString("lName")));
+            }
+            this.con.close();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return requestedTopicsList;
+    }
+
+    //Adding topic in the list of requests to add topic (to be approved by admin)
     public void addRequestedTopic(String topic, String email) {
         try {
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
@@ -580,7 +605,7 @@ public class databaseClass {
             PS1.setString(2, dtf.format(now));
             PS1.setInt(3, userID);
 
-            PS1.executeQuery();
+            PS1.executeUpdate();
 
             con.close();
 
@@ -675,4 +700,120 @@ public class databaseClass {
         }
     }
 
+    public void deleteRequestedTopic(String topic){
+        try {
+            String query="delete from requestedTopics where title=?";
+            
+            PreparedStatement PS=con.prepareStatement(query);
+            
+            PS.setString(1, topic);
+            
+            PS.executeUpdate();
+            
+            con.close();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }   
+    }
+    
+    public void susupendUser(int ID){
+        try {
+            String query="update common_user set userStatus=0 where ID="+ID;
+            PreparedStatement PS=con.prepareStatement(query);
+            PS.executeUpdate();
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(databaseClass.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    
+    public void removeUser(String email){
+        try {
+            
+            String emailQuery = "select ID from common_user where common_user.email=?";
+
+            PreparedStatement PS5 = con.prepareStatement(emailQuery);
+
+            PS5.setString(1, email);
+            
+            ResultSet RS5 = PS5.executeQuery();
+
+            RS5.next();
+
+            int ownerID = Integer.parseInt(RS5.getString("ID"));
+            
+            
+            //Delete from user table
+            String query="delete from common_user where ID="+ownerID;
+            PreparedStatement PS=con.prepareStatement(query);
+            PS.executeUpdate();
+            
+            //Entries from other tables will be deleted via on delete cascade
+            
+            
+            /*
+            //Delete from notes table
+            String query1="delete from notes where owner_id="+ID;
+            PreparedStatement PS1=con.prepareStatement(query1);
+            
+            PS1.executeUpdate();
+            
+            //Delete from requestedTopics table
+            String query2="delete from requestedTopics where requestedBy="+ID;
+            PreparedStatement PS2=con.prepareStatement(query2);
+            
+            PS2.executeUpdate();
+            
+            
+            //Delete from requestedTopics table
+            String query3="delete from requestedTopics where requestedBy="+ID;
+            PreparedStatement PS3=con.prepareStatement(query3);
+            
+            PS3.executeUpdate();
+            
+            
+            //Delete from questions table
+            String query4="delete from questions where askedBy="+ID;
+            PreparedStatement PS4=con.prepareStatement(query4);
+            
+            PS4.executeUpdate();
+            
+            
+            //Delete from requestedTopics table
+            String query5="delete from requestedTopics where requestedBy="+ID;
+            PreparedStatement PS5=con.prepareStatement(query5);
+            
+            PS5.executeUpdate();
+            
+            
+            //Delete from bookMarks table
+            String query6="delete from bookMarks where owner_id="+ID;
+            PreparedStatement PS6=con.prepareStatement(query6);
+            
+            PS6.executeUpdate();
+            
+            
+            //Delete from answers table
+            String query7="delete from answers where ownerID="+ID;
+            PreparedStatement PS7=con.prepareStatement(query7);
+            
+            PS7.executeUpdate();
+            
+            
+            //Delete from reportedQuestions table
+            String query8="delete from reportedQuestions where reportedBy="+ID;
+            PreparedStatement PS8=con.prepareStatement(query8);
+            
+            PS8.executeUpdate();
+            
+            */
+            
+            
+            con.close();
+            
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
 }

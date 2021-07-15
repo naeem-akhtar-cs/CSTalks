@@ -1,5 +1,6 @@
 create table common_user(
-ID int primary key
+suserSatus int
+,ID int primary key
 ,email varchar (40)
 ,fName varchar(40)
 ,lName varchar(40)
@@ -46,8 +47,8 @@ ID int primary key
 ,foreign key questions(askedBy) references common_user(ID)
 );
 
-ALTER TABLE questions
-ADD askedBy int;
+ALTER TABLE common_user
+ADD userStatus int;
 
 ALTER TABLE questions
 ADD foreign key (askedBy) references common_user(ID);
@@ -213,6 +214,23 @@ update categories
 set dateAdded='2021/14/07'
 where ID<11;
 
+
+SHOW CREATE table userLogins;
+
+ALTER TABLE userLogins
+DROP CONSTRAINT userLogins_ibfk_1;
+
+ALTER TABLE userLogins
+ADD foreign key userLogins(userID) references common_user(ID) on delete set null;
+
+update common_user
+set userStatus=1
+where ID>=25 and ID<=33;
+
+update common_user
+set userStatus=1
+where ID=25;
+
 select* from requestedTopics;
 select* from notes;
 select* from common_user;
@@ -224,3 +242,4 @@ select* from answers;
 select* from admin_user;
 select* from reportedQuestions;
 select* from userLogins;
+

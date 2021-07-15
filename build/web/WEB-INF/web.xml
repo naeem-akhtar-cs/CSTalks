@@ -44,6 +44,22 @@
         <servlet-name>addTopic</servlet-name>
         <servlet-class>mainPkg.addTopic</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>processRequestedTopics</servlet-name>
+        <servlet-class>mainPkg.processRequestedTopics</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>removeUser</servlet-name>
+        <servlet-class>mainPkg.removeUser</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>suspendUser</servlet-name>
+        <servlet-class>mainPkg.suspendUser</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>deleteAccount</servlet-name>
+        <servlet-class>mainPkg.deleteAccount</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>signup</servlet-name>
         <url-pattern>/signup</url-pattern>
@@ -83,6 +99,22 @@
     <servlet-mapping>
         <servlet-name>addTopic</servlet-name>
         <url-pattern>/addTopic</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>processRequestedTopics</servlet-name>
+        <url-pattern>/processRequestedTopics</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>removeUser</servlet-name>
+        <url-pattern>/removeUser</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>suspendUser</servlet-name>
+        <url-pattern>/suspendUser</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>deleteAccount</servlet-name>
+        <url-pattern>/deleteAccount</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
