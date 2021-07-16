@@ -1,11 +1,5 @@
 package mainPkg;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -45,6 +39,7 @@ public class login extends HttpServlet {
                     
                     HttpSession session=request.getSession();
                     session.setAttribute("email", email);
+                    
                     response.sendRedirect("user-profile.jsp");
                     
                     break;
@@ -58,6 +53,8 @@ public class login extends HttpServlet {
                     break;
                     
                 default:
+                    request.getSession().setAttribute("alert-message", "Email or Password is Incorrect");
+                    request.getSession().setAttribute("login-error",1);
                     response.sendRedirect("login.jsp");
                     break;
             }

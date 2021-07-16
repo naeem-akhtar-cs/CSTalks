@@ -50,29 +50,26 @@ public class databaseClass {
         Boolean check = true;
 
         try {
-
-            //First CHeck if email entered already exists or not
-//            String str = "select* from common_user";
-//            Statement stmt1 = con.createStatement();
-//            ResultSet rs1 = stmt1.executeQuery(str);
-//            String s1 = "select* from common_user where common_user.email=?";
-//            
-//            PreparedStatement PS = con.prepareStatement(s1);
-//            
-//            PS.setString(1, useremail);
-//            
-//            ResultSet rs = PS.executeQuery();
-//            
-//            rs.last();
-            // if (rs.getRow() == 0) {//No User with this email
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
             LocalDateTime now = LocalDateTime.now();
             Statement stmt = con.createStatement();
+            
+            String s2 = "select ID from common_user where email=?";
+            PreparedStatement PS2=con.prepareStatement(s2);
+            PS2.setString(1, useremail);
+            
+            ResultSet rs2 = PS2.executeQuery();
+            
+            if(rs2.next()){ //Email already in use
+                check=false;
+            }
+            else{ //if Email does not exists
+            
             String s1 = "select max(ID) as ID from common_user";
             ResultSet rs = stmt.executeQuery(s1);
             rs.next();
             int user_ID = Integer.parseInt(rs.getString("ID")); //Getting Max Existing ID of Users
-            System.out.println("Max ID is: " + user_ID);
+            //System.out.println("Max ID is: " + user_ID);
 
             user_ID++;
             String insert = "insert into common_user (ID, email, fName, lName, date_joined, user_status, user_password)"
@@ -88,11 +85,8 @@ public class databaseClass {
             preparedStmt.setInt(6, 1);
             preparedStmt.setString(7, password);
 
-            preparedStmt.execute();
             con.close();
-
-            // check=true;   
-            // }
+        }
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -491,7 +485,12 @@ public class databaseClass {
 
     }
 
-    public void addNote(String email, String note) {
+    public Boolean addNote(String email, String note) {
+        
+        if(note.length()<=5){
+            return false;
+        }
+        else{
         try {
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
             LocalDateTime now = LocalDateTime.now();
@@ -538,6 +537,8 @@ public class databaseClass {
             ex.printStackTrace();
         }
 
+        return true;
+        }
     }
 
     public ArrayList<note> getNotes(String email) {

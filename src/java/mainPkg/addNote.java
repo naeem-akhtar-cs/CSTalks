@@ -32,7 +32,12 @@ public class addNote extends HttpServlet {
         String userEmail=(String) session.getAttribute("email");
          
         databaseClass DB=new databaseClass();
-        DB.addNote(userEmail, newNote);
+        if(DB.addNote(userEmail, newNote)){
+            request.getSession().setAttribute("alert-message", "Note Added SUCCESSFULLY");
+        }
+        else{
+            request.getSession().setAttribute("alert-message", "Note Length must be greater than 5 chars");
+        }
         
         response.sendRedirect("user-profile.jsp");
         }

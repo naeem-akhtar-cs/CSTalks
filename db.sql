@@ -240,6 +240,11 @@ delete from notes where owner_id=25;
 
 ALTER table notes add primary key (ID);
 
+delete from common_user where ID>=33;
+
+ALTER TABLE common_user ADD CONSTRAINT email UNIQUE(email);
+
+
 select* from requestedTopics;
 select* from notes;
 select* from common_user;

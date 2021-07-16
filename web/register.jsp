@@ -20,6 +20,26 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.js"></script>
     <script src="assets/js/theme.js"></script>
 
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+
+    <script>
+        function empty() {
+            
+            fName=document.getElementById("FirstName").value;
+            lName=document.getElementById("LastName").value;
+            email = document.getElementById("Email").value;
+            var password = document.getElementById("Password").value;
+            var repeatPass=document.getElementById("RepeatPassword").value;
+
+            if (fName == "" || lName == "" || email == "" || password == "" || repeatpass == "") {
+                alert("Please fill all the fields");
+                return false;
+            };
+        }
+    </script>
+
 </head>
 
 <body id="page-top">
@@ -60,15 +80,15 @@
                                 
                                 <form class="user" method="POST" action="http://localhost:8080/CSTalks/signup" name="signup-form">
                                     <div class="form-group row">
-                                        <div class="col-sm-6 mb-3 mb-sm-0"><input class="form-control form-control-user" type="text" id="exampleFirstName" placeholder="First Name" name="first_name"></div>
-                                        <div class="col-sm-6"><input class="form-control form-control-user" type="text" id="exampleFirstName" placeholder="Last Name" name="last_name"></div>
+                                        <div class="col-sm-6 mb-3 mb-sm-0"><input class="form-control form-control-user" type="text" id="FirstName" placeholder="First Name" name="first_name"></div>
+                                        <div class="col-sm-6"><input class="form-control form-control-user" type="text" id="LastName" placeholder="Last Name" name="last_name"></div>
                                     </div>
 
-                                    <div class="form-group"><input class="form-control form-control-user" type="email" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Email Address" name="email"></div>
+                                    <div class="form-group"><input class="form-control form-control-user" type="email" id="Email" aria-describedby="emailHelp" placeholder="Email Address" name="email"></div>
                                     <div class="form-group row">
-                                        <div class="col-sm-6 mb-3 mb-sm-0"><input class="form-control form-control-user" type="password" id="examplePasswordInput" placeholder="Password" name="password"></div>
-                                        <div class="col-sm-6"><input class="form-control form-control-user" type="password" id="exampleRepeatPasswordInput" placeholder="Repeat Password" name="password_repeat"></div>
-                                    </div><button class="btn btn-primary btn-block text-white btn-user" type="submit">Register Account</button>
+                                        <div class="col-sm-6 mb-3 mb-sm-0"><input class="form-control form-control-user" type="password" id="Password" placeholder="Password" name="password"></div>
+                                        <div class="col-sm-6"><input class="form-control form-control-user" type="password" id="RepeatPassword" placeholder="Repeat Password" name="password_repeat"></div>
+                                    </div><button class="btn btn-primary btn-block text-white btn-user" type="submit" id="submit" onClick="return empty()">Register Account</button>
                                     <hr>
                                 </form>
 
@@ -80,6 +100,11 @@
             </div>
         </div>
     </div>
+
+    <% if(session.getAttribute("alert-message")!=null){ %>
+        <jsp:include page="alert.jsp" />
+    <% } session.removeAttribute("alert-message"); %>
+
 </body>
 
 </html>

@@ -10,6 +10,11 @@
     <link rel="stylesheet" href="assets/fonts/fontawesome-all.min.css">
     <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
     <link rel="stylesheet" href="assets/fonts/fontawesome5-overrides.min.css">
+
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+
 </head>
 
 <body id="page-top">
@@ -127,9 +132,11 @@
                     </div>
                 </div>
             </div>
-            <footer class="bg-white sticky-footer">
-
-            </footer>
+            
+            <% if(session.getAttribute("alert-message")!=null){ %>
+            <jsp:include page="alert.jsp" />
+            <% } session.removeAttribute("alert-message"); %>
+            
         </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
     </div>
     <script src="assets/js/jquery.min.js"></script>
