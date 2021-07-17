@@ -270,3 +270,5 @@ select* from userLogins;
 select* from reportedQuestions;
 
 delete from reportedQuestions where questionID=11;	
+
+update common_user set user_status=1 where ID=31;

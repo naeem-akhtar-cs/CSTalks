@@ -22,6 +22,7 @@ public class deleteNote extends HttpServlet {
         databaseClass DB=new databaseClass();
         DB.deleteNote(ID);
         
+        request.getSession().setAttribute("alert-message", "Note Deleteds");
         response.sendRedirect("notes.jsp");
     }
 
