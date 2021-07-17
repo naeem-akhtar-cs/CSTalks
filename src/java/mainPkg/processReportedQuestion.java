@@ -16,36 +16,24 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author naeem
  */
-public class updateUserSetting extends HttpServlet {
+public class processReportedQuestion extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
 
-        String userEmail = (String) request.getSession().getAttribute("email");
+        int questionID=Integer.parseInt(request.getParameter("questionID"));
+        
+        String selection = request.getParameter("actions");
 
-        String fName = request.getParameter("first_name");
-        String lName = request.getParameter("last_name");
-
-        String userAge = request.getParameter("age");
-        int age = 0;
-
-        try {
-            age = Integer.parseInt(userAge);
-
-            String university = request.getParameter("university");
-
-            databaseClass DB = new databaseClass();
-
-            DB.updateUserSetting(userEmail, fName, lName, age, university);
-
-            request.getSession().setAttribute("alert-message", "User setting updated");
-                
-        } catch (Exception ex) {
-            request.getSession().setAttribute("alert-message", "Age can not be a character");
-        }
-
-        response.sendRedirect("user-profile.jsp");
+        if (selection.equals("delete")) {
+            new databaseClass().deleteQuestion(questionID);
+        } 
+        //delete request
+        new databaseClass().deleteReport(questionID);
+        
+        response.sendRedirect("delete-question-requests.jsp");
+        
     }
 
     @Override
@@ -60,9 +48,10 @@ public class updateUserSetting extends HttpServlet {
         processRequest(request, response);
     }
 
+
     @Override
     public String getServletInfo() {
         return "Short description";
-    }// </editor-fold>
+    }
 
 }

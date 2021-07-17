@@ -49,7 +49,8 @@
                                             <div class="row">
                                                 <div class="d-table w-100">
                                                     <td>
-                                                        <%= questions.getStatement(i) %>(<%= questions.getCategory(i) %>)
+                                                        <%= questions.getStatement(i) %>(<%= questions.getCategory(i) %>
+                                                                )
                                                     </td>
                                                     <div class="d-table-cell tar">
                                                         <i class="fa fa-bookmark" aria-hidden="true"
@@ -61,12 +62,42 @@
                                     </div>
                                     <br>
 
-                                    <button class="btn btn-primary btn-sm" type="button"
-                                        style="background-color: green;">Add to
-                                        BookMark</button>
-                                    <button class="btn btn-primary btn-sm" type="button"
-                                        style="background-color: rgb(235, 43, 43); border: #eee; margin-left: 20%;">Report
-                                        Question</button>
+
+                                    <table class="table my-0" id="dataTable">
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <form method="POST"
+                                                        action="http://localhost:8080/CSTalks/addToBookMark">
+
+                                                        <input type="hidden" name="questionID"
+                                                            value="<%= questions.getQuestionID(i) %>" />
+
+                                                        <button class="btn btn-primary btn-sm" type="submit"
+                                                            style="background-color: green;">Add to BookMark</button>
+
+                                                    </form>
+                                                </td>
+                                                <td>
+                                                    <form method="POST"
+                                                        action="http://localhost:8080/CSTalks/reportQuestion">
+
+                                                        <input type="hidden" name="questionID"
+                                                            value="<%= questions.getQuestionID(i) %>" />
+
+                                                        <button class="btn btn-primary btn-sm" type="submit"
+                                                            style="background-color: rgb(235, 43, 43); border: #eee; margin-left: 20%;">Report
+                                                            Question</button>
+
+                                                    </form>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
+
+
+
 
                                     <div style="text-align:right">Posted by: <%= questions.getpostedBy(i) %></span>
                                     </div>
@@ -80,43 +111,49 @@
                                         <hr color="blue">
 
                                         <% //arraylist contains all the answers of question id ArrayList<answer>
-                                                ArrayList<answer> answers=questions.getAnswers(i);
+                                            ArrayList<answer> answers=questions.getAnswers(i);
 
-                                            for(int j=0;j<answers.size();j++){ %>
+                                                for(int j=0;j<answers.size();j++){ %>
 
-                                                <p class="text-dark mb-4">
-                                                    <%= answers.get(j).getStatement() %>
-                                                </p>
-                                                <div class="d-table w-100">
-                                                    <div class="d-table-cell tar">
-                                                        <p style="text-align:right">Answered by: <%=
-                                                                answers.get(j).getAnsweredBy() %></span></p>
-                                                    </div>
-                                                </div>
-                                                <p style="text-align:right">Date Answered: <%= answers.get(j).getAnsweredDate() %>
-                                                </p>
-
-                                                <hr color="blue">
-
-                                                <% } %>
-
-                                                    <div class="container-fluid">
-                                                        <div class="card shadow">
-
-                                                            <div class="card-body">
-                                                                <form method="POST" action="http://localhost:8080/CSTalks/addAnswer">
-                                                                    <input type="hidden" name="questionID" value="<%= questions.getQuestionID(i) %>" />
-                                                                    <div class="form-group">
-                                                                        <input class="form-control form-control-user"
-                                                                            type="text"
-                                                                            placeholder="Your Answer" name="answer">
-                                                                    </div>
-                                                                    <button class="btn btn-primary text-white btn-user"
-                                                                        type="submit" style="float:right">Post</button>
-                                                                </form>
-                                                            </div>
+                                                    <p class="text-dark mb-4">
+                                                        <%= answers.get(j).getStatement() %>
+                                                    </p>
+                                                    <div class="d-table w-100">
+                                                        <div class="d-table-cell tar">
+                                                            <p style="text-align:right">Answered by: <%=
+                                                                    answers.get(j).getAnsweredBy() %></span></p>
                                                         </div>
                                                     </div>
+                                                    <p style="text-align:right">Date Answered: <%=
+                                                            answers.get(j).getAnsweredDate() %>
+                                                    </p>
+
+                                                    <hr color="blue">
+
+                                                    <% } %>
+
+                                                        <div class="container-fluid">
+                                                            <div class="card shadow">
+
+                                                                <div class="card-body">
+                                                                    <form method="POST"
+                                                                        action="http://localhost:8080/CSTalks/addAnswer">
+                                                                        <input type="hidden" name="questionID"
+                                                                            value="<%= questions.getQuestionID(i) %>" />
+                                                                        <div class="form-group">
+                                                                            <input
+                                                                                class="form-control form-control-user"
+                                                                                type="text" placeholder="Your Answer"
+                                                                                name="answer">
+                                                                        </div>
+                                                                        <button
+                                                                            class="btn btn-primary text-white btn-user"
+                                                                            type="submit"
+                                                                            style="float:right">Post</button>
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                     </div>
                                 </div>
                                 <br>
@@ -125,6 +162,11 @@
                         </div>
                     </div>
                 </div>
-        </body>
+
+                <% if(session.getAttribute("alert-message")!=null){ %>
+                    <jsp:include page="alert.jsp" />
+                <% } session.removeAttribute("alert-message"); %>
+        
+            </body>
 
         </html>

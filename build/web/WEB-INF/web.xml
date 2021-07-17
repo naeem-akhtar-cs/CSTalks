@@ -76,6 +76,18 @@
         <servlet-name>addAnswer</servlet-name>
         <servlet-class>mainPkg.addAnswer</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>addToBookMark</servlet-name>
+        <servlet-class>mainPkg.addToBookMark</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>reportQuestion</servlet-name>
+        <servlet-class>mainPkg.reportQuestion</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>processReportedQuestion</servlet-name>
+        <servlet-class>mainPkg.processReportedQuestion</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>signup</servlet-name>
         <url-pattern>/signup</url-pattern>
@@ -147,6 +159,18 @@
     <servlet-mapping>
         <servlet-name>addAnswer</servlet-name>
         <url-pattern>/addAnswer</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>addToBookMark</servlet-name>
+        <url-pattern>/addToBookMark</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>reportQuestion</servlet-name>
+        <url-pattern>/reportQuestion</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>processReportedQuestion</servlet-name>
+        <url-pattern>/processReportedQuestion</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

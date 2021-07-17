@@ -215,10 +215,10 @@ set dateAdded='2021/14/07'
 where ID<11;
 
 
-SHOW CREATE table common_user;
+SHOW CREATE table bookMarks;
 
-ALTER TABLE common_user
-DROP COLUMN userStatus;
+ALTER TABLE bookMarks
+DROP CONSTRAINT question_id;
 
 ALTER TABLE userLogins
 ADD foreign key userLogins(userID) references common_user(ID) on delete set null;
@@ -250,14 +250,23 @@ delete from notes where ID>4;
 
 delete from common_user where ID=33;
 
+update admin_user
+set fName='Habib', lName='Jalib'
+where ID=1;
+
+ALter table bookMarks
+add unique(question_id);
+
 select* from requestedTopics;
 select* from notes;
 select* from common_user;
-select* from questions;
+	
 select* from categories;
 select* from categories;
 select* from bookMarks;
 select* from answers;
 select* from admin_user;
-select* from reportedQuestions;
 select* from userLogins;
+select* from reportedQuestions;
+
+delete from reportedQuestions where questionID=11;	

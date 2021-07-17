@@ -23,6 +23,7 @@
 
     <% if(session.getAttribute("adminEmail")==null){ response.sendRedirect("login.jsp"); } %>
 
+        <jsp:useBean id="questions" class="BeansPkg.reportedQuestionsHelper" scope="page"></jsp:useBean>
 
         <div id="wrapper">
 
@@ -34,7 +35,7 @@
                     <jsp:include page="admin-navigation.jsp" />
 
                     <div class="container-fluid">
-                        <h3 class="text-dark mb-4">Reported Questions</h3>
+                        <h3 class="text-dark mb-4">Questions Reported by Users</h3>
                         <div class="card shadow">
 
                             <div class="card-body">
@@ -46,54 +47,46 @@
                                             <tr>
                                                 <th>Question</th>
                                                 <th>Date Reported</th>
-                                                <th>reported By</th>
+                                                <th>Reported By</th>
                                                 <th>Select Action</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
 
-                                            <tr>
-                                                <td>What does ACID stand for in Database?</td>
-                                                <td>2021/05/27</td>
-                                                <td><a href="">Talha Zaheer</a></td>
-                                                <td>
-                                                    <div class="d-table-cell tar">
-                                                        <form action="/action_page.php">
-                                                            <select id="actions">
-                                                                <option value="reject">Reject Request</option>
-                                                                <option value="add">Delete Question</option>
-                                                            </select>
-                                                            <br><br>
-                                                        </form>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div class="mb-3"><button class="btn btn-primary btn-sm"
-                                                            type="button">Proceed</button></div>
-                                                </td>
-                                            </tr>
+                                            <% for(int i=0;i<questions.getSize();i++){ %>
+                                                <tr>
+                                                    <form method="POST" action="http://localhost:8080/CSTalks/processReportedQuestion">
+                                                        
+                                                        <input type="hidden" name="questionID" value="<%= questions.getQuestionID(i) %>"/>
 
-                                            <tr>
-                                                <td>Why do Use Transactions in Database?</td>
-                                                <td>2021/05/27</td>
-                                                <td><a href="">Zohaib Abbas</a></td>
-                                                <td>
-                                                    <div class="d-table-cell tar">
-                                                        <form action="/action_page.php">
-                                                            <select id="actions">
-                                                                <option value="reject">Reject Request</option>
-                                                                <option value="add">Delete Question</option>
-                                                            </select>
-                                                            <br><br>
-                                                        </form>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div class="mb-3"><button class="btn btn-primary btn-sm"
-                                                            type="button">Proceed</button></div>
-                                                </td>
-                                            </tr>
+                                                        <td>
+                                                            <%= questions.getStatement(i) %>
+                                                        </td>
+                                                        <td>
+                                                            <%= questions.getDateReported(i) %>
+                                                        </td>
+                                                        <td><a href="">
+                                                                <%= questions.getReportedBy(i) %>
+                                                            </a></td>
+                                                        <td>
+                                                            <div class="d-table-cell tar">
+
+                                                                <select name="actions">
+                                                                    <option value="reject">Reject Request</option>
+                                                                    <option value="delete">Delete Question</option>
+                                                                </select>
+                                                                <br><br>
+
+                                                            </div>
+                                                        </td>
+                                                        
+                                                        <td>
+                                                            <div class="mb-3"><input value="Proceed" class="btn btn-primary btn-sm" type="submit"/></div>
+                                                        </td>
+                                                    </form>
+                                                </tr>
+                                                <% } %>
                                         </tbody>
                                     </table>
                                 </div>
@@ -101,6 +94,8 @@
                         </div>
                     </div>
                 </div>
+                <footer class="bg-white sticky-footer">
+                </footer>
             </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
         </div>
         <script src="assets/js/jquery.min.js"></script>

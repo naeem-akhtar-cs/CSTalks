@@ -4,6 +4,7 @@ import BeansPkg.answer;
 import BeansPkg.category;
 import BeansPkg.note;
 import BeansPkg.questionDetailPage;
+import BeansPkg.reportedQuestion;
 import BeansPkg.requestedTopic;
 import BeansPkg.trend;
 import BeansPkg.userprofile;
@@ -383,7 +384,7 @@ public class databaseClass {
 
         try {
             String query = "select question_statement, title as categoryTitle from bookMarks join questions on "
-                    + "bookMarks.ID=questions.ID join categories on questions.category=categories.ID join common_user on "
+                    + "bookMarks.question_id=questions.ID join categories on questions.category=categories.ID join common_user on "
                     + "bookMarks.owner_id=common_user.ID where common_user.email=?";
 
             PreparedStatement PS = con.prepareStatement(query);
@@ -725,6 +726,22 @@ public class databaseClass {
             ex.printStackTrace();
         }
     }
+    
+    public void deleteReport(int questionID) {
+        try {
+            String query = "delete from reportedQuestions where questionID=?";
+
+            PreparedStatement PS = con.prepareStatement(query);
+
+            PS.setInt(1, questionID);
+
+            PS.executeUpdate();
+
+            con.close();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
 
     public void susupendUser(int ID) {
         try {
@@ -805,40 +822,153 @@ public class databaseClass {
     public void addAnswer(int questionID, String ownerEmail, String answer) {
 
         try {
-            
+
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
             LocalDateTime now = LocalDateTime.now();
-            
-            
+
             ResultSet rs = con.createStatement().executeQuery("select max(ID) as ID from answers");
             rs.next();
             int maxAnswerID = rs.getInt("ID"); //Getting Max Existing ID of answer
-            
+
             PreparedStatement PS1 = con.prepareStatement("select ID from common_user where email=?");
-            
+
             PS1.setString(1, ownerEmail);
-            ResultSet rs1=PS1.executeQuery();
-            
+            ResultSet rs1 = PS1.executeQuery();
+
             rs1.next();
             int ownerID = Integer.parseInt(rs1.getString("ID")); //Getting Max Existing ID of Users
-            
+
             maxAnswerID++;
             String query = "insert into answers values(?, ?, ?, ?, ?)";
-            
-            PreparedStatement PS=con.prepareStatement(query);
-            
+
+            PreparedStatement PS = con.prepareStatement(query);
+
             PS.setInt(1, maxAnswerID);
             PS.setString(2, answer);
             PS.setInt(3, ownerID);
             PS.setString(4, dtf.format(now));
             PS.setInt(5, questionID);
-            
+
             PS.executeUpdate();
-            
+
             con.close();
-            
+
         } catch (SQLException ex) {
             Logger.getLogger(databaseClass.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
+    public Boolean addBookMark(int questionID, String ownerEmail) {
+
+        Boolean check = true;
+        try {
+            PreparedStatement PS5 = con.prepareStatement("select question_id from bookMarks left join "
+                    + "common_user on bookMarks.owner_id=common_user.ID where "
+                    + "question_id=" + questionID + " and common_user.email=?");
+
+            PS5.setString(1, ownerEmail);
+
+            ResultSet rs3 = PS5.executeQuery();
+
+            if (rs3.next()) { //Already book marked
+                check = false;
+            } else {
+                ResultSet rs = con.createStatement().executeQuery("select max(ID) as ID from bookMarks");
+                rs.next();
+                int maxBookMarkID = rs.getInt("ID"); //Getting Max Existing ID of BookMarks
+
+                PreparedStatement PS1 = con.prepareStatement("select ID from common_user where email=?");
+
+                PS1.setString(1, ownerEmail);
+                ResultSet rs1 = PS1.executeQuery();
+
+                rs1.next();
+                int ownerID = Integer.parseInt(rs1.getString("ID")); //Getting Max Existing ID of Users
+
+                maxBookMarkID++;
+
+                String query = "insert into bookMarks values(?, ?, ?)";
+
+                PreparedStatement PS = con.prepareStatement(query);
+
+                PS.setInt(1, maxBookMarkID);
+                PS.setInt(2, questionID);
+                PS.setInt(3, ownerID);
+
+                PS.executeUpdate();
+
+                con.close();
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(databaseClass.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return check;
+    }
+
+    public Boolean reportQuestion(int questionID, String ownerEmail) {
+        Boolean check = true;
+        try {
+            PreparedStatement PS5 = con.prepareStatement("select questionID from reportedQuestions "
+                    + "where questionID=" + questionID);
+
+            ResultSet rs3 = PS5.executeQuery();
+            if (rs3.next()) { //Already book marked
+                check = false;
+            } else {
+
+                DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+                LocalDateTime now = LocalDateTime.now();
+
+                PreparedStatement PS1 = con.prepareStatement("select ID from common_user where email=?");
+
+                PS1.setString(1, ownerEmail);
+                ResultSet rs1 = PS1.executeQuery();
+
+                rs1.next();
+                int ownerID = Integer.parseInt(rs1.getString("ID")); //Getting Max Existing ID of Users
+
+                String query = "insert into reportedQuestions values(?, ?, ?)";
+
+                PreparedStatement PS = con.prepareStatement(query);
+
+                PS.setInt(1, questionID);
+                PS.setString(2, dtf.format(now));
+                PS.setInt(3, ownerID);
+
+                PS.executeUpdate();
+
+                con.close();
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(databaseClass.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return check;
+    }
+    
+    public ArrayList<reportedQuestion> reportedQuestions(){
+        
+        ArrayList<reportedQuestion> reportedList=new ArrayList<>();
+        
+        try {
+            String query="select questions.ID as questionID, question_statement, fName, lName, dateReported "
+                    + "from reportedQuestions left join common_user on reportedQuestions.reportedBy=common_user.ID "
+                    + "left join questions on reportedQuestions.questionID=questions.ID";
+            
+            PreparedStatement PS=con.prepareStatement(query);
+            
+            ResultSet RS=PS.executeQuery();
+            
+            while(RS.next()){
+                reportedList.add(new reportedQuestion(RS.getInt("questionID"), RS.getString("question_statement"),
+                        RS.getString("dateReported"), RS.getString("fName")+" "+RS.getString("lName")));
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(databaseClass.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return reportedList;
+    }
+    
 }
