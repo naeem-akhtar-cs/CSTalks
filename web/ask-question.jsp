@@ -20,10 +20,10 @@
     <script src="assets/js/theme.js"></script>
 
     <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
     <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 
-    
+
     <style>
         .w-100 {
             width: 100%;
@@ -38,94 +38,78 @@
 
 <body id="page-top">
 
-    
+
 
     <jsp:useBean id="category" class="BeansPkg.categoriesHelper" scope="page"></jsp:useBean>
 
-    <% 
-        if(session.getAttribute("email")==null){
-            response.sendRedirect("login.jsp");
-        }
-    %>
+    <% if(session.getAttribute("email")==null){ response.sendRedirect("login.jsp"); } %>
 
-    <div id="wrapper">
-        
-        <jsp:include page="menu.jsp" />
+        <div id="wrapper">
 
-        <div class="d-flex flex-column" id="content-wrapper">
-            <div id="content">
-                
-                
-                <jsp:include page="navigation.jsp" />
+            <jsp:include page="menu.jsp" />
 
-                <!--
+            <div class="d-flex flex-column" id="content-wrapper">
+                <div id="content">
+
+
+                    <jsp:include page="navigation.jsp" />
+
+                    <!--
 
     Your Code Goes Here
 -->
 
-                <div class="container-fluid">
-                    <h3 class="text-dark mb-4">Post a Question</h3>
-                    <p>
-                    <div class="card shadow">
+                    <div class="container-fluid">
+                        <h3 class="text-dark mb-4">Post a Question</h3>
+                        <p>
+                        <div class="card shadow">
 
-                        <div class="card-body">
-                            <form method="POST" action="http://localhost:8080/CSTalks/askquestion" name="ask-question-form">
-                                <div class="d-table w-100">
-                                    <p class="text-dark mb-4">Category of question : </p>
+                            <div class="card-body">
+                                <form method="POST" action="http://localhost:8080/CSTalks/askquestion"
+                                    name="ask-question-form">
+                                    <div class="d-table w-100">
+                                        <p class="text-dark mb-4">Category of question : </p>
 
-                                    <div class="d-table-cell tar">
+                                        <div class="d-table-cell tar">
                                             <select name="categories">
 
                                                 <% for(int i=0;i<category.getcount();i++){ %>
 
                                                     <option value="<%= category.gettitle(i) %>">
-                                                    <%= category.gettitle(i) %>
+                                                        <%= category.gettitle(i) %>
                                                     </option>
 
-                                                    <% } %>
+                                                <% } %>
 
                                             </select>
                                             <br><br>
+                                        </div>
+
                                     </div>
 
-                                </div>
+                                    <div class="form-group">
+                                        <input class="form-control form-control-user" type="text" id="exampleInputEmail"
+                                            aria-describedby="emailHelp" placeholder="Question statement"
+                                            name="statement">
+                                    </div>
 
-                                <div class="form-group">
-                                    <input class="form-control form-control-user" type="text" id="exampleInputEmail"
-                                        aria-describedby="emailHelp" placeholder="Question statement" name="statement">
-                                </div>
-
-                                <button class="btn btn-primary text-white btn-user" type="submit"
-                                    style="float:right">Post</button>
-
-                            </form>
-
+                                    <button class="btn btn-primary text-white btn-user" type="submit"
+                                        style="float:right">Post</button>
+                                </form>
+                            </div>
                         </div>
-
                     </div>
-
-
                 </div>
-
-
-
-
-
             </div>
-
-
-
-
-
-
-
-
-
+            <footer class="bg-white sticky-footer">
+            </footer>
+        </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
         </div>
-        <footer class="bg-white sticky-footer">
-        </footer>
-    </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
-    </div>
+
+        <% if(session.getAttribute("alert-message")!=null){ %>
+            <jsp:include page="alert.jsp" />
+        <% } session.removeAttribute("alert-message"); %>
+
 </body>
 
 </html>

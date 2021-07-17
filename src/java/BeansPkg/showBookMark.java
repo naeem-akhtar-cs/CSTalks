@@ -14,47 +14,29 @@ import mainPkg.databaseClass;
  * @author naeem
  */
 public class showBookMark {
-     private ArrayList<question> bookMarkList;
-    private int index;
-    
-    public showBookMark(){
-        this.index=0;
-        this.bookMarkList=new ArrayList<>();
+
+    private ArrayList<HashMap<String, String>> bookMarkList;
+
+    public showBookMark() {
+
     }
-    
-    public void getData(String email){
-        
-        databaseClass DB=new databaseClass();
-        
-        ArrayList<HashMap<String, String>> bookMarks=DB.getBookMarks(email);
-        
-        for(int i=0;i<bookMarks.size();i++){
-            HashMap<String, String> question=bookMarks.get(i);
-            
-            question ques=new question();
-            
-            ques.setstatement(question.get("statement"));
-            ques.setcategory(question.get("category"));
-            
-            bookMarkList.add(ques);
-        }
+
+    public void getData(String email) {
+
+        databaseClass DB = new databaseClass();
+
+        this.bookMarkList = DB.getBookMarks(email);
     }
-    
-    public String getstatement(){
-        return bookMarkList.get(index).getstatement();
+
+    public String getstatement(int index) {
+        return bookMarkList.get(index).get("statement");
     }
-    
-    public String getcategory(){
-         //This Approach of Tracking List is not Good
-        return bookMarkList.get(index++).getcategory();
+
+    public String getcategory(int index) {
+        return bookMarkList.get(index).get("category");
     }
-    
-    public int getcount(){
+
+    public int getcount() {
         return bookMarkList.size();
     }
-    
-    public void resetIndex(){
-        index=0;
-    }
-    
 }

@@ -2,34 +2,56 @@
 package BeansPkg;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import mainPkg.databaseClass;
 
 /**
  *
  * @author naeem
  */
 
-//This class has all the information related to detail of a page
-
+//This class has all the information related to detail of a question
 public class questionDetailPage {
+    private int ID;
     private String statement;
     private String postedBy;
     private String dateAsked;
+    private String category;
     private ArrayList<answer> answers;
     
-    public questionDetailPage(){
-        
+    public questionDetailPage(int ID, String statement, String postedBy, String dateAsked, 
+            String category, ArrayList<answer> answers){
+        this.ID=ID;
+        this.statement=statement;
+        this.postedBy=postedBy;
+        this.dateAsked=dateAsked;
+        this.category=category;
+        this.answers=answers;
     }
     
-    public void getData(String question){
-        databaseClass DB=new databaseClass();
-        
-        HashMap questionData=DB.getQuestionDetails(question);
-        
-        this.statement=(String)questionData.get("statement");
-        this.postedBy=(String)questionData.get("postedBy");
-        this.dateAsked=(String)questionData.get("dateAsked");
-        this.answers=(ArrayList<answer>)questionData.get("answers");
+    public int getNoAnswers(){
+        return this.answers.size();
+    }
+    
+    public int getQuestionID(){
+        return this.ID;
+    }
+    
+    public String getStatement(){
+        return this.statement;
+    }
+    
+    public String getpostedBy(){
+        return this.postedBy;
+    }
+    
+    public String getDateAsked(){
+        return this.dateAsked;
+    }
+    
+    public String getCategory(){
+        return this.category;
+    }
+    
+    public ArrayList<answer> getAnswer(int index){
+        return this.answers;
     }
 }

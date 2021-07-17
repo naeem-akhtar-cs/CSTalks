@@ -21,22 +21,31 @@ public class updateUserSetting extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
-        String userEmail=(String) request.getSession().getAttribute("email");
-        
-        String fName=request.getParameter("first_name");
-        String lName=request.getParameter("last_name");
-        
-        String age=request.getParameter("age");
-        String university=request.getParameter("university");
-        
-        databaseClass DB=new databaseClass();
-        
-        
-        DB.updateUserSetting(userEmail, fName, lName, age, university);
-        
-        response.sendRedirect("user-profile.jsp");
-        
+
+        String userEmail = (String) request.getSession().getAttribute("email");
+
+        String fName = request.getParameter("first_name");
+        String lName = request.getParameter("last_name");
+
+        String userAge = request.getParameter("age");
+        int age = 0;
+
+        try {
+            age = Integer.parseInt(userAge);
+
+            String university = request.getParameter("university");
+
+            databaseClass DB = new databaseClass();
+
+            DB.updateUserSetting(userEmail, fName, lName, age, university);
+
+            request.getSession().setAttribute("alert-message", "User setting updated");
+            
+        } catch (Exception ex) {
+            request.getSession().setAttribute("alert-message", "Age can not be a character");
+        }
+
+        response.sendRedirect("user-profile.jsp"); 
     }
 
     @Override
@@ -45,13 +54,11 @@ public class updateUserSetting extends HttpServlet {
         processRequest(request, response);
     }
 
-
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
-
 
     @Override
     public String getServletInfo() {

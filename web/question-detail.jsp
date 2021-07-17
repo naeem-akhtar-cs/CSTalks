@@ -1,136 +1,130 @@
-<!DOCTYPE html>
-<html lang="Eng">
+<%@page import="BeansPkg.answer" %>
+    <%@page import="java.util.ArrayList" %>
+        <!DOCTYPE html>
+        <html lang="Eng">
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Question - CSTALKS</title>
-    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
-    <link rel="stylesheet" href="assets/fonts/fontawesome-all.min.css">
-    <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
-    <link rel="stylesheet" href="assets/fonts/fontawesome5-overrides.min.css">
+        <head>
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+            <title>Question - CSTALKS</title>
+            <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+            <link rel="stylesheet"
+                href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
+            <link rel="stylesheet" href="assets/fonts/fontawesome-all.min.css">
+            <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
+            <link rel="stylesheet" href="assets/fonts/fontawesome5-overrides.min.css">
 
-    <script src="assets/js/jquery.min.js"></script>
-    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
-    <script src="assets/js/chart.min.js"></script>
-    <script src="assets/js/bs-init.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.js"></script>
-    <script src="assets/js/theme.js"></script>
+            <script src="assets/js/jquery.min.js"></script>
+            <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+            <script src="assets/js/chart.min.js"></script>
+            <script src="assets/js/bs-init.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.js"></script>
+            <script src="assets/js/theme.js"></script>
 
-    <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
-    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-    
-    <style>
-        .btn1 {
-            border: none;
-            border-radius: 12px;
-            background-color: inherit;
-            padding: 13px 13px;
-            font-size: 13px;
-            cursor: pointer;
-            display: inline-block;
-        }
-        
-        .btn1:hover {
-            background: #eee;
-        }
-        
-        .success {
-            color: green;
-        }
-        
-        .danger {
-            color: red;
-        }
-        
-        .w-100 {
-            width: 100%;
-        }
-        
-        .tar {
-            text-align: right;
-        }
-    </style>
+            <link rel="stylesheet" href="assets/css/style.css">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+            <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 
+        </head>
 
-</head>
+        <body id="page-top">
 
-<body id="page-top">
-    <div id="wrapper">
-        
-        <jsp:include page="menu.jsp" />
+            <% if(session.getAttribute("email")==null){ response.sendRedirect("login.jsp"); } %>
 
-        <div class="d-flex flex-column" id="content-wrapper">
-            <div id="content">
-                
-                <jsp:include page="navigation.jsp" />
+                <jsp:useBean id="questions" class="BeansPkg.questionshelper" scope="page"></jsp:useBean>
 
-                <% String requestURL=request.getRequestURL().toString(); %>
+                <div id="wrapper">
 
-                <div class="container-fluid">
-                    <h2 class="text-dark mb-4">OOP</h2>
-                    <!--topic of question-->
+                    <jsp:include page="menu.jsp" />
 
-                    <div class="card shadow">
+                    <div class="d-flex flex-column" id="content-wrapper">
+                        <div id="content">
 
-                        <div class="card-body">
-                            <div class="row">
+                            <jsp:include page="navigation.jsp" />
 
-                                <div class="d-table w-100">
-                                    <td>What are Draw Backs of Inheritance?</td>
-                                    <div class="d-table-cell tar">
-                                        <i class="fa fa-bookmark" aria-hidden="true" style="font-size:24px;"></i>
+                            <% for(int i=0;i<questions.getSize();i++){ %>
+                                <div class="container-fluid">
+                                    <div class="card shadow">
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="d-table w-100">
+                                                    <td>
+                                                        <%= questions.getStatement(i) %>(<%= questions.getCategory(i) %>)
+                                                    </td>
+                                                    <div class="d-table-cell tar">
+                                                        <i class="fa fa-bookmark" aria-hidden="true"
+                                                            style="font-size:24px;"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <br>
+
+                                    <button class="btn btn-primary btn-sm" type="button"
+                                        style="background-color: green;">Add to
+                                        BookMark</button>
+                                    <button class="btn btn-primary btn-sm" type="button"
+                                        style="background-color: rgb(235, 43, 43); border: #eee; margin-left: 20%;">Report
+                                        Question</button>
+
+                                    <div style="text-align:right">Posted by: <%= questions.getpostedBy(i) %></span>
+                                    </div>
+                                    <div style="text-align:right">Date Asked: <%= questions.getDateAsked(i) %>
+                                    </div>
+
+                                    <hr color="blue">
+
+                                    <div>
+                                        <h3 class="text-dark mb-4">Answers</h3>
+                                        <hr color="blue">
+
+                                        <% //arraylist contains all the answers of question id ArrayList<answer>
+                                                ArrayList<answer> answers=questions.getAnswers(i);
+
+                                            for(int j=0;j<answers.size();j++){ %>
+
+                                                <p class="text-dark mb-4">
+                                                    <%= answers.get(j).getStatement() %>
+                                                </p>
+                                                <div class="d-table w-100">
+                                                    <div class="d-table-cell tar">
+                                                        <p style="text-align:right">Answered by: <%=
+                                                                answers.get(j).getAnsweredBy() %></span></p>
+                                                    </div>
+                                                </div>
+                                                <p style="text-align:right">Date Answered: <%= answers.get(j).getAnsweredDate() %>
+                                                </p>
+
+                                                <hr color="blue">
+
+                                                <% } %>
+
+                                                    <div class="container-fluid">
+                                                        <div class="card shadow">
+
+                                                            <div class="card-body">
+                                                                <form method="POST" action="http://localhost:8080/CSTalks/addAnswer">
+                                                                    <input type="hidden" name="questionID" value="<%= questions.getQuestionID(i) %>" />
+                                                                    <div class="form-group">
+                                                                        <input class="form-control form-control-user"
+                                                                            type="text"
+                                                                            placeholder="Your Answer" name="answer">
+                                                                    </div>
+                                                                    <button class="btn btn-primary text-white btn-user"
+                                                                        type="submit" style="float:right">Post</button>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <br>
-                    <button class="btn btn-primary btn-sm" type="button" style="background-color: green;">Add to BookMark</button>
-                    <button class="btn btn-primary btn-sm" type="button" style="background-color: rgb(235, 43, 43); border: #eee; margin-left: 20%;">Report Question</button>
-                    <div style="text-align:right">Posted by : <span style="float : right;"><a href="#">Samran Waheed</a></span></div>
-                    <div style="text-align:right">Asked : Sep 20, 1999</div>
-
-
-                    <div>
-                        <h2 class="text-dark mb-4">Answers</h2>
-                        <!-- Answer 1-->
-                        <p class="text-dark mb-4">Inherited functions work slower than normal function as there is indirection.</p>
-                        <div class="d-table w-100">
-                            <button class="btn success">UpVote</button>
-                            <button class="btn danger">DownVote</button>
-                            <div class="d-table-cell tar">
-                                <p style="text-align:right">Posted by: <span style="float : right;"><a href="#" >Samran Waheed</a></span></p>
-                            </div>
-                        </div>
-                        <p style="text-align:right">Answered : Sep 20, 1999</p>
-
-                        <hr>
-                        
-
-                        <div class="container-fluid">
-                            <h3 class="text-dark mb-4">Answer this question</h3>
-
-                            <div class="card shadow">
-
-                                <div class="card-body">
-                                    <div class="form-group">
-                                        <input class="form-control form-control-user" type="text" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Your Answer" name="answer">
-                                    </div>
-                                    <button class="btn btn-primary text-white btn-user" type="submit" style="float:right">Post</button>
-                                </div>
-                            </div>
+                                <br>
+                                <hr color="red">
+                                <% } %>
                         </div>
                     </div>
                 </div>
-            </div>
-            <footer class="bg-white sticky-footer">
-            </footer>
-        </div>
-    </div>
-</body>
+        </body>
 
-</html>
+        </html>

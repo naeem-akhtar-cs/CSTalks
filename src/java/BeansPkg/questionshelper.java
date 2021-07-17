@@ -1,12 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package BeansPkg;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import javax.inject.Scope;
 import mainPkg.databaseClass;
 
 /**
@@ -14,46 +9,42 @@ import mainPkg.databaseClass;
  * @author naeem
  */
 public class questionshelper {
-    
-    private ArrayList<question> questionsList;
-    private int index;
-    
-    public questionshelper(){
-        
-        index=0;
-        
-        databaseClass DB=new databaseClass();
-        
-        ArrayList<HashMap<String, String>> Questionslist=DB.getQuestions();
-        
-        questionsList=new ArrayList<>();
-        
-        for(int i=0;i<Questionslist.size();i++){
-            HashMap<String, String> question=Questionslist.get(i);
-            
-            question ques=new question();
-            
-            ques.setstatement(question.get("statement"));
-            ques.setcategory(question.get("category"));
-            
-            questionsList.add(ques);
-        }
+
+    private ArrayList<questionDetailPage> questionsList;
+
+    public questionshelper() {
+
+        DBAccessController controller = new DBAccessController();
+
+        questionsList = controller.getQuestionsList();
     }
-    
-    public String getstatement(){
-        return questionsList.get(index).getstatement();
+
+    public int getQuestionID(int index) {
+        return this.questionsList.get(index).getQuestionID();
     }
-    
-    public String getcategory(){
-         //This Approach of Tracking List is not Good
-        return questionsList.get(index++).getcategory();
+
+    public String getStatement(int index) {
+        return this.questionsList.get(index).getStatement();
     }
-    
-    public int getcount(){
-        return questionsList.size();
+
+    public String getpostedBy(int index) {
+        return this.questionsList.get(index).getpostedBy();
     }
-    
-    public void resetIndex(){
-        index=0;
+
+    public String getDateAsked(int index) {
+        return this.questionsList.get(index).getDateAsked();
+    }
+
+    public String getCategory(int index) {
+        return this.questionsList.get(index).getCategory();
+    }
+
+    public int getSize() {
+        return this.questionsList.size();
+    }
+
+    //Number of answers of that particular question
+    public ArrayList<answer> getAnswers(int index) {
+        return questionsList.get(index).getAnswer(index);
     }
 }

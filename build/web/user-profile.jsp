@@ -19,7 +19,7 @@
 
 <body id="page-top">
 
-    <jsp:useBean id ="user" class = "BeansPkg.userprofile" scope="page"></jsp:useBean>
+    <jsp:useBean id ="user" class = "BeansPkg.userprofile" scope="page"></jsp:useBean> 
     
     <% 
     if(session.getAttribute("email")==null){

@@ -43,7 +43,6 @@ public class userprofile implements Serializable{
     
     public void getData(String email){
     
-       
      databaseClass obj=new databaseClass();
      
      HashMap<String, String> userData=obj.getUserData(email);

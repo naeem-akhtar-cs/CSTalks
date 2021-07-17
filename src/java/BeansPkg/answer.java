@@ -10,13 +10,26 @@ package BeansPkg;
  * @author naeem
  */
 public class answer {
+
     private String statement;
     private String answerBy;
     private String answerDate;
+
+    public answer(String answer, String answerBy, String answerDate) {
+        this.statement = answer;
+        this.answerBy = answerBy;
+        this.answerDate = answerDate;
+    }
+
+        public String getStatement() {
+        return this.statement;
+    }
+
+    public String getAnsweredBy() {
+        return this.answerBy;
+    }
     
-    public answer(String answer, String answerBy, String answerDate){
-        this.statement=answer;
-        this.answerBy=answerBy;
-        this.answerDate=answerDate;
+        public String getAnsweredDate(){
+        return this.answerDate;
     }
 }

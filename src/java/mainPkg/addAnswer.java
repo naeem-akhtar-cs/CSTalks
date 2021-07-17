@@ -16,16 +16,20 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author naeem
  */
-public class signout extends HttpServlet {
+public class addAnswer extends HttpServlet {
 
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            
-            request.getSession().invalidate();
-            response.sendRedirect("index.jsp");
-        }
+        
+        String ID=request.getParameter("questionID");
+        String answer=request.getParameter("answer");
+        
+        databaseClass DB=new databaseClass();
+        DB.addAnswer(Integer.parseInt(ID), (String)request.getSession().getAttribute("email"), answer);
+        
+        response.sendRedirect("question-detail.jsp");
     }
 
     
@@ -42,10 +46,8 @@ public class signout extends HttpServlet {
         processRequest(request, response);
     }
 
-    
     @Override
     public String getServletInfo() {
         return "Short description";
-    }// </editor-fold>
-
+    }
 }

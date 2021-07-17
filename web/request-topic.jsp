@@ -49,11 +49,6 @@
                 
                 <jsp:include page="navigation.jsp" />
 
-                <!--
-
-    Your Code Goes Here
--->
-
                 <div class="container-fluid">
                     <h3 class="text-dark mb-4">Request Admin to Add New Topic</h3>
                     <div class="card shadow">
@@ -76,6 +71,11 @@
         </footer>
     </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
     </div>
+
+    <% if(session.getAttribute("alert-message")!=null){ %>
+        <jsp:include page="alert.jsp" />
+    <% } session.removeAttribute("alert-message"); %>
+
 </body>
 
 </html>

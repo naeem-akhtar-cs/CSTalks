@@ -28,7 +28,6 @@
 
             <jsp:useBean id="questions" class="BeansPkg.questionshelper" scope="page"></jsp:useBean>
 
-
     <div id="wrapper">
         
         <jsp:include page="admin-menu.jsp" />
@@ -48,37 +47,34 @@
                                 <table class="table my-0" id="dataTable">
                                     <thead>
                                         <tr>
-                                            <th>Questions Related to Search Query</th>
+                                            <th>Question</th>
                                             <th>Category</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
 
-                                        <% for(int i=0;i<questions.getcount();i++){ %>
+                                        <% for(int i=0;i<questions.getSize();i++){ %>
                                             <form method="POST"
                                                 action="http://localhost:8080/CSTalks/deleteQuestion">
-                                                <input type="hidden" name="question" value="<jsp:getProperty name="questions" property="statement" />" />
+                                                <input type="hidden" name="questionID" value="<%= questions.getQuestionID(i) %>" />
                                                 <tr>
                                                     <td>
                                                         <div>
-                                                            <jsp:getProperty name="questions" property="statement" />
+                                                            <%= questions.getStatement(i) %>
                                                         </div>
                                                     </td>
                                                     <td>
-                                                        <jsp:getProperty name="questions" property="category" />
+                                                        <%= questions.getCategory(i) %>
                                                     </td>
                                                     
-
                                                     <td>
                                                         <div class="mb-3"><input type="submit" class="btn btn-primary btn-sm" value="Remove"/></div>
                                                     </td>
 
                                                 </tr>
                                             </form>
-                                            <% } questions.resetIndex(); %>
-
-
+                                            <% } %>
 
                                     </tbody>
 

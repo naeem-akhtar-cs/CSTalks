@@ -33,8 +33,8 @@ public class websiteStatistics implements Serializable {
 
         this.usersVisits = (int) webData.get("usersVisits");
         this.questionsAsked = (int) webData.get("questionsCount");
-        this.questionsReported = (int) webData.get("answersCount");
-        this.questionsAnswered = (int) webData.get("reportedCount");
+        this.questionsReported = (int) webData.get("reportedCount");
+        this.questionsAnswered = (int) webData.get("answersCount");
 
         this.trendingTopics = (ArrayList<trend>) webData.get("trendingTopics");
     }

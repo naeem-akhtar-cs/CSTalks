@@ -26,6 +26,8 @@ public class requestTopic extends HttpServlet {
             databaseClass DB=new databaseClass();
             DB.addRequestedTopic(topic, email);
             
+            request.getSession().setAttribute("alert-message", "Request sent. Admin will take action");
+            
             response.sendRedirect("request-topic.jsp");   
         }
     }

@@ -18,28 +18,6 @@
             </div>
         </form>
 
-        
-        <!-- Sending note without refreshing the page -->
-
-        <script>
-            function ajaxpost(){
-              // (A) GET FORM DATA
-              var data = new FormData();
-              data.append("name", document.getElementById("note1").value);
-             
-              // (B) AJAX
-              var xhr = new XMLHttpRequest();
-              xhr.open("POST", "http://localhost:8080/CSTalks/addNote");
-              // What to do when server responds
-              xhr.onload = function(){ console.log(this.response); };
-              xhr.send(data);
-             
-              // (C) PREVENT HTML FORM SUBMIT
-              return false;
-            }
-        </script>
-
-
         <ul class="navbar-nav flex-nowrap ml-auto">
             <li class="nav-item dropdown d-sm-none no-arrow"><a class="dropdown-toggle nav-link" aria-expanded="false" data-toggle="dropdown" href="#"><i class="fas fa-search"></i></a>
                 <div class="dropdown-menu dropdown-menu-right p-3 animated--grow-in" aria-labelledby="searchDropdown">

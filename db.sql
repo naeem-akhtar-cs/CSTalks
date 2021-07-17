@@ -244,13 +244,18 @@ delete from common_user where ID>=33;
 
 ALTER TABLE common_user ADD CONSTRAINT email UNIQUE(email);
 
+delete from common_user where ID=38;
+
+delete from notes where ID>4;
+
+delete from common_user where ID=33;
 
 select* from requestedTopics;
 select* from notes;
 select* from common_user;
 select* from questions;
 select* from categories;
-select* from requestedTopics;
+select* from categories;
 select* from bookMarks;
 select* from answers;
 select* from admin_user;

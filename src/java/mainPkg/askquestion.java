@@ -31,9 +31,10 @@ public class askquestion extends HttpServlet {
             databaseClass DB=new databaseClass();
             DB.insertQuestion((String)request.getSession().getAttribute("email"), statement, category);
             
+            request.getSession().setAttribute("alert-message", "Question added SUCESSFULLY");
+            
             response.sendRedirect("ask-question.jsp"); //Redirecting Back to Ask Question Page
             
-            //System.out.println("Start "+statement+" "+category);
         }
     }
 

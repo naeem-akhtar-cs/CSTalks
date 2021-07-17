@@ -23,10 +23,10 @@ public class deleteQuestion extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
        
-        String question=request.getParameter("question");
+        int questionID=Integer.parseInt(request.getParameter("questionID"));
         
         databaseClass DB=new databaseClass();
-        DB.deleteQuestion(question);
+        DB.deleteQuestion(questionID);
         
         response.sendRedirect("delete-question.jsp");
         

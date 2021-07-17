@@ -6,7 +6,6 @@
 package BeansPkg;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import mainPkg.databaseClass;
 
 /**

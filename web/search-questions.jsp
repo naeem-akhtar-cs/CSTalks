@@ -45,14 +45,16 @@
                                     <table class="table my-0" id="dataTable">
                                         <thead>
                                             <tr>
-                                                <th>Questions Related to Search Query</th>
+                                                <th>Question</th>
                                                 <th>Category</th>
-                                                <th>Action</th>
                                             </tr>
                                         </thead>
+
+                                        <% for(int i=0;i<questions.getcount();i++){ %>
+
                                         <tbody>
 
-                                            <% for(int i=0;i<questions.getcount();i++){ %>
+                                            
                                                 <form method="POST"
                                                     action="http://localhost:8080/CSTalks/questionDetail">
                                                     <input type="hidden" name="question" value="<jsp:getProperty name="questions" property="statement" />" />
@@ -65,16 +67,24 @@
                                                         <td>
                                                             <jsp:getProperty name="questions" property="category" />
                                                         </td>
-                                                        <td>
-                                                            <div class="mb-3"><button type="submit" class="btn btn-primary btn-sm" type="button">Details</button></div>
-                                                        </td>
                                                     </tr>
+
+
+                                                    <button class="btn btn-primary btn-sm" type="button" style="background-color: green;">Add to
+                                                        BookMark</button>
+                                                    <button class="btn btn-primary btn-sm" type="button"
+                                                        style="background-color: rgb(235, 43, 43); border: #eee; margin-left: 20%;">Report
+                                                        Question</button>
+                                                    <div style="text-align:right">Posted by: <span style="float : right;"><a href="#"> Samran
+                                                                Waheed</a></span></div>
+                                                    <div style="text-align:right">Asked : Sep 20, 1999</div>
+
                                                 </form>
-                                                <% } questions.resetIndex(); %>
-
-
+                                                
 
                                         </tbody>
+
+                                        <% } questions.resetIndex(); %>
 
                                     </table>
                                 </div>

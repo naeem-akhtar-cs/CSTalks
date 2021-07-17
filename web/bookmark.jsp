@@ -31,9 +31,6 @@
         }
         %>
 
-        
-
-        
         <jsp:include page="menu.jsp" />
 
         <div class="d-flex flex-column" id="content-wrapper">
@@ -59,27 +56,13 @@
 
                                         <% for(int i=0;i<bookmarks.getcount();i++){ %>
                                             <tr>
-                                                <td><a href="question-detail.jsp"><jsp:getProperty name="bookmarks" property="statement"/></a></td>
-                                                <td><jsp:getProperty name="bookmarks" property="category"/></td>
+                                                <td><%= bookmarks.getstatement(i) %></td>
+                                                <td><%= bookmarks.getcategory(i) %></td>
                                             </tr>
-                                        <% } bookmarks.resetIndex();  %>
+                                        <% } %>
 
                                     </tbody>
                                 </table>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6 align-self-center">
-                                    <p id="dataTable_info" class="dataTables_info" role="status" aria-live="polite">Showing 1 to 13 of 77</p>
-                                </div>
-                                <div class="col-md-6">
-                                    <nav class="d-lg-flex justify-content-lg-end dataTables_paginate paging_simple_numbers">
-                                        <ul class="pagination">
-                                            <li class="page-item disabled"><a class="page-link" href="#" aria-label="Previous"><span aria-hidden="true">«</span></a></li>
-                                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                                            <li class="page-item"><a class="page-link" href="#" aria-label="Next"><span aria-hidden="true">»</span></a></li>
-                                        </ul>
-                                    </nav>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -88,7 +71,8 @@
             <footer class="bg-white sticky-footer">
 
             </footer>
-        </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
+        </div>
+        <a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
     </div>
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
