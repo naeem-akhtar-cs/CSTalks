@@ -28,7 +28,11 @@ public class processRequestedTopics extends HttpServlet {
         databaseClass DB = new databaseClass();
         if (selection.equals("add")) {
             DB.addTopic(topic);
+            request.getSession().setAttribute("alert-message", "Topic approved");
         } 
+        else{
+             request.getSession().setAttribute("alert-message", "Topic deleted");
+        }
         //delete request
         DB.deleteRequestedTopic(topic);
         

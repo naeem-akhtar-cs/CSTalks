@@ -29,6 +29,8 @@ public class addAnswer extends HttpServlet {
         databaseClass DB=new databaseClass();
         DB.addAnswer(Integer.parseInt(ID), (String)request.getSession().getAttribute("email"), answer);
         
+        request.getSession().setAttribute("alert-message", "Answer added");
+                
         response.sendRedirect("question-detail.jsp");
     }
 

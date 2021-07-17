@@ -28,6 +28,7 @@ public class deleteQuestion extends HttpServlet {
         databaseClass DB=new databaseClass();
         DB.deleteQuestion(questionID);
         
+        request.getSession().setAttribute("alert-message", "Question deleted");
         response.sendRedirect("delete-question.jsp");
         
     }

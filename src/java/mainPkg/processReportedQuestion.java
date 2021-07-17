@@ -28,7 +28,11 @@ public class processReportedQuestion extends HttpServlet {
 
         if (selection.equals("delete")) {
             new databaseClass().deleteQuestion(questionID);
+            request.getSession().setAttribute("alert-message", "Question Deleted");
         } 
+        else{
+            request.getSession().setAttribute("alert-message", "Request Rejected");
+        }
         //delete request
         new databaseClass().deleteReport(questionID);
         

@@ -21,7 +21,7 @@ public class suspendUser extends HttpServlet {
         int userID=Integer.parseInt(request.getParameter("ID"));
         
         DB.susupendUser(userID);
-        
+        request.getSession().setAttribute("alert-message", "User suspended");
         response.sendRedirect("table.jsp");
     }
 

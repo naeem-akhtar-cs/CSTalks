@@ -74,6 +74,10 @@
             </footer>
         </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
         </div>
+        
+        <% if(session.getAttribute("alert-message")!=null){ %>
+            <jsp:include page="alert.jsp" />
+        <% } session.removeAttribute("alert-message"); %>
 </body>
 
 </html>

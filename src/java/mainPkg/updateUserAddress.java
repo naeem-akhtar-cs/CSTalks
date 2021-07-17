@@ -33,6 +33,8 @@ public class updateUserAddress extends HttpServlet {
         databaseClass DB=new databaseClass();
         DB.updateUserAddress(userEmail, address, city, province);
   
+        request.getSession().setAttribute("alert-message", "Address Deleted");
+        
         response.sendRedirect("user-profile.jsp");
     }
 

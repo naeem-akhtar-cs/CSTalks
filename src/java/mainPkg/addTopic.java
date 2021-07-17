@@ -24,6 +24,8 @@ public class addTopic extends HttpServlet {
         databaseClass DB=new databaseClass();
         DB.addTopic(statement);
         
+        request.getSession().setAttribute("alert-message", "Topic Addeds");
+        
         response.sendRedirect("add-topic.jsp");
     }
 
