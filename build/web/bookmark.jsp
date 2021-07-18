@@ -24,7 +24,7 @@
         <jsp:useBean id = "bookmarks" class = "BeansPkg.showBookMark" scope="page"></jsp:useBean>
         <% 
         if(session.getAttribute("email")==null){
-            response.sendRedirect("login.jsp");
+            response.sendRedirect("index.jsp");
         }
         else{
             bookmarks.getData((String)session.getAttribute("email")); 

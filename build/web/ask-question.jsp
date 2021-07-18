@@ -42,7 +42,7 @@
 
     <jsp:useBean id="category" class="BeansPkg.categoriesHelper" scope="page"></jsp:useBean>
 
-    <% if(session.getAttribute("email")==null){ response.sendRedirect("login.jsp"); } %>
+    <% if(session.getAttribute("email")==null){ response.sendRedirect("index.jsp"); } %>
 
         <div id="wrapper">
 
@@ -53,11 +53,6 @@
 
 
                     <jsp:include page="navigation.jsp" />
-
-                    <!--
-
-    Your Code Goes Here
--->
 
                     <div class="container-fluid">
                         <h3 class="text-dark mb-4">Post a Question</h3>

@@ -21,7 +21,7 @@
 
 <body id="page-top">
 
-    <% if(session.getAttribute("adminEmail")==null){ response.sendRedirect("login.jsp"); } %>
+    <% if(session.getAttribute("adminEmail")==null){ response.sendRedirect("index.jsp"); } %>
 
         <jsp:useBean id="questions" class="BeansPkg.reportedQuestionsHelper" scope="page"></jsp:useBean>
 

@@ -21,7 +21,7 @@
 
     <% 
                 if(session.getAttribute("adminEmail")==null){
-                    response.sendRedirect("login.jsp");
+                    response.sendRedirect("index.jsp");
             }
             %>
 

@@ -55,7 +55,7 @@ public class login extends HttpServlet {
                 default:
                     request.getSession().setAttribute("alert-message", "Email or Password is Incorrect");
                     request.getSession().setAttribute("login-error",1);
-                    response.sendRedirect("login.jsp");
+                    response.sendRedirect("index.jsp");
                     break;
             }
         }

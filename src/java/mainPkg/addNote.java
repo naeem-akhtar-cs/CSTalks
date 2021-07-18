@@ -39,7 +39,7 @@ public class addNote extends HttpServlet {
             request.getSession().setAttribute("alert-message", "Note Length must be greater than 5 chars");
         }
         
-        response.sendRedirect("user-profile.jsp");
+        response.sendRedirect("notes.jsp");
         }
     }
 

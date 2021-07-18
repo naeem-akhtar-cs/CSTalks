@@ -24,7 +24,7 @@
 
         <% 
         if(session.getAttribute("email")==null){
-            response.sendRedirect("login.jsp");
+            response.sendRedirect("index.jsp");
         }
         else{
             notes.getData((String)session.getAttribute("email")); 

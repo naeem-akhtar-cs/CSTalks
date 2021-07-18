@@ -37,7 +37,7 @@
 
 <body id="page-top">
 
-    <% if(session.getAttribute("adminEmail")==null){ response.sendRedirect("login.jsp"); } %>
+    <% if(session.getAttribute("adminEmail")==null){ response.sendRedirect("index.jsp"); } %>
 
 
 

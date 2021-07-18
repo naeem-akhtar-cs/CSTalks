@@ -92,7 +92,7 @@
                                     <hr>
                                 </form>
 
-                                <div class="text-center"><a class="small" href="login.jsp">Already have an account? Login!</a></div>
+                                <div class="text-center"><a class="small" href="index.jsp">Already have an account? Login!</a></div>
                             </div>
                         </div>
                     </div>

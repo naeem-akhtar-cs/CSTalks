@@ -48,7 +48,7 @@ public class signup extends HttpServlet {
         if(obj.DBSignUP(fName, lName, email, password, repeatPassword)){ //Data Inserted
 
         request.getSession().setAttribute("alert-message", "Signup SUCCESSFULL!! Please login");
-        response.sendRedirect("login.jsp");
+        response.sendRedirect("index.jsp");
         }
         else{ //Data not Inserted returned false
             request.getSession().setAttribute("alert-message", "Email provided already exists");

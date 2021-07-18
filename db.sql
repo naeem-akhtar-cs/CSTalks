@@ -251,11 +251,26 @@ delete from notes where ID>4;
 delete from common_user where ID=33;
 
 update admin_user
-set fName='Habib', lName='Jalib'
+set fName='Amir', lName='Wali'
 where ID=1;
 
 ALter table bookMarks
 add unique(question_id);
+
+delete from reportedQuestions where questionID=11;	
+
+update common_user set user_status=1 where ID=31;
+
+show create table reportedQuestions;
+
+alter table reportedQuestions
+drop constraint reportedQuestions_ibfk_2;
+
+delete from reportedQuestions where questionID=15;
+
+ALTER TABLE reportedQuestions
+ADD foreign key reportedQuestions(questionID) references questions(ID) on delete cascade;
+
 
 select* from requestedTopics;
 select* from notes;
@@ -268,7 +283,4 @@ select* from answers;
 select* from admin_user;
 select* from userLogins;
 select* from reportedQuestions;
-
-delete from reportedQuestions where questionID=11;	
-
-update common_user set user_status=1 where ID=31;
+select* from questions;

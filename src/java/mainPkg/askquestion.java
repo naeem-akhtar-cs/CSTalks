@@ -22,9 +22,7 @@ public class askquestion extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            
-            
+        
             String statement=request.getParameter("statement");
             String category=request.getParameter("categories");
             
@@ -34,8 +32,7 @@ public class askquestion extends HttpServlet {
             request.getSession().setAttribute("alert-message", "Question added SUCESSFULLY");
             
             response.sendRedirect("ask-question.jsp"); //Redirecting Back to Ask Question Page
-            
-        }
+        
     }
 
    

@@ -4,7 +4,7 @@
         <jsp:useBean id ="user" class = "BeansPkg.adminprofile" scope="page"></jsp:useBean>
             <% 
                 if(session.getAttribute("adminEmail")==null){
-                    response.sendRedirect("login.jsp");
+                    response.sendRedirect("index.jsp");
             }
             else{
                 user.getData((String)session.getAttribute("adminEmail")); 
