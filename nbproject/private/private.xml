@@ -3,50 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/naeem/OneDrive/Documents/NetBeansProjects/CSTalks/src/java/mainPkg/deleteQuestion.java</file>
-            <file>file:/C:/Users/naeem/OneDrive/Documents/NetBeansProjects/CSTalks/src/java/mainPkg/updateUserAddress.java</file>
-            <file>file:/C:/Users/naeem/OneDrive/Documents/NetBeansProjects/CSTalks/src/java/BeansPkg/websiteStatistics.java</file>
-            <file>file:/C:/Users/naeem/OneDrive/Documents/NetBeansProjects/CSTalks/web/question-detail.jsp</file>
-            <file>file:/C:/Users/naeem/OneDrive/Documents/NetBeansProjects/CSTalks/src/java/BeansPkg/answer.java</file>
-            <file>file:/C:/Users/naeem/OneDrive/Documents/NetBeansProjects/CSTalks/src/java/mainPkg/deleteAccount.java</file>
-            <file>file:/C:/Users/naeem/OneDrive/Documents/NetBeansProjects/CSTalks/src/java/mainPkg/signup.java</file>
-            <file>file:/C:/Users/naeem/OneDrive/Documents/NetBeansProjects/CSTalks/src/java/mainPkg/addNote.java</file>
-            <file>file:/C:/Users/naeem/OneDrive/Documents/NetBeansProjects/CSTalks/src/java/mainPkg/askquestion.java</file>
-            <file>file:/C:/Users/naeem/OneDrive/Documents/NetBeansProjects/CSTalks/src/java/BeansPkg/requestedTopic.java</file>
-            <file>file:/C:/Users/naeem/OneDrive/Documents/NetBeansProjects/CSTalks/src/java/BeansPkg/questionshelper.java</file>
-            <file>file:/C:/Users/naeem/OneDrive/Documents/NetBeansProjects/CSTalks/src/java/mainPkg/login.java</file>
-            <file>file:/C:/Users/naeem/OneDrive/Documents/NetBeansProjects/CSTalks/src/java/mainPkg/addAnswer.java</file>
-            <file>file:/C:/Users/naeem/OneDrive/Documents/NetBeansProjects/CSTalks/src/java/BeansPkg/reportedQuestion.java</file>
-            <file>file:/C:/Users/naeem/OneDrive/Documents/NetBeansProjects/CSTalks/src/java/BeansPkg/note.java</file>
-            <file>file:/C:/Users/naeem/OneDrive/Documents/NetBeansProjects/CSTalks/web/delete-question.jsp</file>
-            <file>file:/C:/Users/naeem/OneDrive/Documents/NetBeansProjects/CSTalks/src/java/BeansPkg/showBookMark.java</file>
-            <file>file:/C:/Users/naeem/OneDrive/Documents/NetBeansProjects/CSTalks/src/java/mainPkg/suspendUser.java</file>
-            <file>file:/C:/Users/naeem/OneDrive/Documents/NetBeansProjects/CSTalks/src/java/mainPkg/processRequestedTopics.java</file>
-            <file>file:/C:/Users/naeem/OneDrive/Documents/NetBeansProjects/CSTalks/src/java/mainPkg/addToBookMark.java</file>
-            <file>file:/C:/Users/naeem/OneDrive/Documents/NetBeansProjects/CSTalks/src/java/BeansPkg/reportedQuestionsHelper.java</file>
-            <file>file:/C:/Users/naeem/OneDrive/Documents/NetBeansProjects/CSTalks/src/java/mainPkg/reportQuestion.java</file>
-            <file>file:/C:/Users/naeem/OneDrive/Documents/NetBeansProjects/CSTalks/src/java/mainPkg/addTopic.java</file>
-            <file>file:/C:/Users/naeem/OneDrive/Documents/NetBeansProjects/CSTalks/web/delete-question-requests.jsp</file>
-            <file>file:/C:/Users/naeem/OneDrive/Documents/NetBeansProjects/CSTalks/src/java/BeansPkg/questionDetailPage.java</file>
-            <file>file:/C:/Users/naeem/OneDrive/Documents/NetBeansProjects/CSTalks/src/java/BeansPkg/userprofile.java</file>
-            <file>file:/C:/Users/naeem/OneDrive/Documents/NetBeansProjects/CSTalks/src/java/mainPkg/signout.java</file>
-            <file>file:/C:/Users/naeem/OneDrive/Documents/NetBeansProjects/CSTalks/web/admin-dashboard.jsp</file>
-            <file>file:/C:/Users/naeem/OneDrive/Documents/NetBeansProjects/CSTalks/web/admin-profile.jsp</file>
-            <file>file:/C:/Users/naeem/OneDrive/Documents/NetBeansProjects/CSTalks/src/java/mainPkg/processReportedQuestion.java</file>
-            <file>file:/C:/Users/naeem/OneDrive/Documents/NetBeansProjects/CSTalks/web/notes.jsp</file>
-            <file>file:/C:/Users/naeem/OneDrive/Documents/NetBeansProjects/CSTalks/web/alert.jsp</file>
-            <file>file:/C:/Users/naeem/OneDrive/Documents/NetBeansProjects/CSTalks/web/user-profile.jsp</file>
-            <file>file:/C:/Users/naeem/OneDrive/Documents/NetBeansProjects/CSTalks/src/java/BeansPkg/notesHelper.java</file>
-            <file>file:/C:/Users/naeem/OneDrive/Documents/NetBeansProjects/CSTalks/src/java/BeansPkg/DBAccessController.java</file>
-            <file>file:/C:/Users/naeem/OneDrive/Documents/NetBeansProjects/CSTalks/src/java/BeansPkg/trend.java</file>
             <file>file:/C:/Users/naeem/OneDrive/Documents/NetBeansProjects/CSTalks/src/java/mainPkg/databaseClass.java</file>
-            <file>file:/C:/Users/naeem/OneDrive/Documents/NetBeansProjects/CSTalks/src/java/BeansPkg/requestedTopicsHelper.java</file>
-            <file>file:/C:/Users/naeem/OneDrive/Documents/NetBeansProjects/CSTalks/src/java/BeansPkg/categoriesHelper.java</file>
-            <file>file:/C:/Users/naeem/OneDrive/Documents/NetBeansProjects/CSTalks/src/java/BeansPkg/allUsers.java</file>
-            <file>file:/C:/Users/naeem/OneDrive/Documents/NetBeansProjects/CSTalks/src/java/mainPkg/requestTopic.java</file>
-            <file>file:/C:/Users/naeem/OneDrive/Documents/NetBeansProjects/CSTalks/src/java/mainPkg/updateUserSetting.java</file>
+            <file>file:/C:/Users/naeem/OneDrive/Documents/NetBeansProjects/CSTalks/src/java/BeansPkg/websiteStatistics.java</file>
+            <file>file:/C:/Users/naeem/OneDrive/Documents/NetBeansProjects/CSTalks/src/java/mainPkg/addNote.java</file>
             <file>file:/C:/Users/naeem/OneDrive/Documents/NetBeansProjects/CSTalks/src/java/mainPkg/deleteNote.java</file>
-            <file>file:/C:/Users/naeem/OneDrive/Documents/NetBeansProjects/CSTalks/src/java/BeansPkg/category.java</file>
+            <file>file:/C:/Users/naeem/OneDrive/Documents/NetBeansProjects/CSTalks/src/java/mainPkg/askquestion.java</file>
             <file>file:/C:/Users/naeem/OneDrive/Documents/NetBeansProjects/CSTalks/src/java/BeansPkg/adminprofile.java</file>
         </group>
     </open-files>
