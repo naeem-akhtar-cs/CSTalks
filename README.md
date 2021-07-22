@@ -57,4 +57,4 @@ Following are some of the screens of our websites. You can also all pages from G
 ### Questions Details
 ![Alt text](6.png?raw=true "Optional Title")
 
-if there is any questions, please feel free to ask at naeem.akhtar.cs@gmail.com. Thanks
+Thanks
